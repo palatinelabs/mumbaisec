@@ -1,0 +1,412 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>MumbaiSec - Mumbai's Computer Security Club</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<!-- FullCalendar CSS -->
+		<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css' rel='stylesheet' />
+		<style>
+			body { background: #1e2937 !important; }
+			#sidebar { background: #1e2937 !important; }
+			.wrapper.style1 { background-color: #4c6b9a !important; }
+			.wrapper.style2 { background-color: #2b4465 !important; }
+			.wrapper.style3 { background-color: #4c6b9a !important; }
+			.wrapper.style1-alt { background-color: #1e2937 !important; }
+			.inner { max-width: 85em !important; }
+			#sidebar nav a:hover { color: #ffffff !important; }
+			#sidebar nav a.active { color: #ffffff !important; }
+			.features { gap: 2em !important; }
+			.feature-box {
+				background: rgba(255, 255, 255, 0.05);
+				padding: 2em;
+				border-radius: 0.5em;
+				margin: 0;
+			}
+			.feature-header {
+				display: flex;
+				align-items: center;
+				margin-bottom: 1em;
+			}
+			.feature-header .icon {
+				margin-right: 1em;
+				color: white;
+				background: none;
+				width: auto;
+				height: auto;
+				line-height: 1;
+			}
+			.feature-header h3 {
+				margin: 0;
+			}
+			#calendar-container {
+				max-width: 900px;
+				margin: 2em auto;
+				background: rgba(255, 255, 255, 0.05);
+				padding: 1em;
+				border-radius: 0.5em;
+			}
+			.fc {
+				color: #ffffff;
+			}
+			.fc-button {
+				background-color: #4c6b9a !important;
+				border: none !important;
+			}
+			.fc-button:hover {
+				background-color: #2b4465 !important;
+			}
+			.fc-daygrid-day {
+				background: rgba(255, 255, 255, 0.05);
+			}
+			.fc-event {
+				background-color: #4c6b9a;
+				border-color: #4c6b9a;
+			}
+			.fc-daygrid-day-number {
+				color: #ffffff;
+			}
+			.fc-daygrid-day-top {
+				justify-content: center;
+			}
+			.fc-daygrid-day-events {
+				margin-top: 0.5em;
+			}
+			.fc-daygrid-event {
+				background-color: #2b4465;
+				border-color: #2b4465;
+				color: #ffffff;
+				padding: 0.2em 0.5em;
+				border-radius: 0.25em;
+			}
+			.fc-daygrid-event:hover {
+				background-color: #4c6b9a;
+			}
+			.fc-toolbar-title {
+				color: #ffffff;
+			}
+			.fc-col-header-cell {
+				background-color: #2b4465;
+				color: #ffffff;
+			}
+			.fc-daygrid-day.fc-day-today {
+				background-color: rgba(255, 255, 255, 0.1);
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Welcome</a></li>
+							<li><a href="#one">What We're About</a></li>
+							<li><a href="#two">Skills & Training</a></li>
+							<li><a href="#activities">Our Activities</a></li>
+							<li><a href="#calendar">Calendar</a></li>
+							<li><a href="#sponsors">Sponsors</a></li>
+							<li><a href="#three">Get in Touch</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Welcome to MumbaiSec</h1>
+							<p class="major">Mumbai's Premier Cybersecurity Community</p>
+							<p>Are you passionate about cybersecurity? Looking to enhance your skills, network with like-minded individuals, or just starting your journey in the world of information security?</p>
+							<p>We are a dynamic community of cybersecurity enthusiasts, professionals, and learners who come together to:</p>
+							<ul style="margin-bottom: 1.5em;">
+								<li>Master practical security skills through hands-on workshops</li>
+								<li>Participate in exciting CTF competitions and security challenges</li>
+								<li>Learn from industry experts and guest speakers</li>
+								<li>Network with fellow security enthusiasts</li>
+							</ul>
+							<ul class="actions">
+								<li><a href="#one" class="button scrolly">Discover More</a></li>
+								<li><a href="#three" class="button scrolly">Join Us</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- One -->
+					<section id="one" class="wrapper style2 spotlights">
+						<section>
+							<a href="#" class="image"><img src="images/cybertech.png" alt="Cybersecurity Discussion" data-position="center center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>What We're About</h2>
+									<p>MumbaiSec is a vibrant computer security club that brings together cybersecurity enthusiasts to discuss and stay updated with the latest cyber trends and events. We create an engaging environment where members can learn, collaborate, and grow together in the field of cybersecurity.</p>
+								</div>
+							</div>
+						</section>
+					</section>
+
+				<!-- Skills & Training -->
+					<section id="two" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Skills & Training</h2>
+							<p>We focus on developing practical cybersecurity skills through hands-on training and real-world applications.</p>
+							<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2em; margin-top: 2em;">
+								<div class="feature-box">
+									<div class="feature-header">
+										<span class="icon solid major fa-lock"></span>
+										<h3>Cryptography</h3>
+									</div>
+									<p>The practice and study of techniques for secure communication in the presence of adversarial behavior.</p>
+								</div>
+								<div class="feature-box">
+									<div class="feature-header">
+										<span class="icon solid major fa-cog"></span>
+										<h3>Reverse Engineering</h3>
+									</div>
+									<p>Understanding the functionality of software or hardware to identify deeper issues and vulnerabilities.</p>
+								</div>
+								<div class="feature-box">
+									<div class="feature-header">
+										<span class="icon solid major fa-bug"></span>
+										<h3>Binary Exploitation</h3>
+									</div>
+									<p>Taking advantage of bugs or flaws in software to leak information or take control.</p>
+								</div>
+								<div class="feature-box">
+									<div class="feature-header">
+										<span class="icon solid major fa-globe"></span>
+										<h3>Web Security</h3>
+									</div>
+									<p>Attacking protocols, software, and infrastructure related to the world wide web.</p>
+								</div>
+								<div class="feature-box">
+									<div class="feature-header">
+										<span class="icon solid major fa-shield-alt"></span>
+										<h3>Forensics</h3>
+									</div>
+									<p>Application of investigation and analysis techniques to gather and preserve evidence.</p>
+								</div>
+								<div class="feature-box">
+									<div class="feature-header">
+										<span class="icon solid major fa-network-wired"></span>
+										<h3>Network Security</h3>
+									</div>
+									<p>Understanding and implementing secure network architectures and protocols.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+				<!-- Activities -->
+					<section id="activities" class="wrapper style2 fade-up">
+						<div class="inner">
+							<h2>Our Activities</h2>
+							<p>We offer a diverse range of activities and opportunities for our members to engage with cybersecurity in practical and meaningful ways.</p>
+							<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2em; margin-top: 2em;">
+								<div class="feature-box">
+									<div class="feature-header">
+										<span class="icon solid major fa-users"></span>
+										<h3>Regular Meetings</h3>
+									</div>
+									<p>Weekly meetings to discuss current cybersecurity concepts and trends, featuring hands-on learning experiences.</p>
+								</div>
+								<div class="feature-box">
+									<div class="feature-header">
+										<span class="icon solid major fa-flag"></span>
+										<h3>CTF Competitions</h3>
+									</div>
+									<p>Participate in Capture The Flag competitions to test and improve your cybersecurity skills in a competitive environment.</p>
+								</div>
+								<div class="feature-box">
+									<div class="feature-header">
+										<span class="icon solid major fa-chalkboard-teacher"></span>
+										<h3>Guest Speakers</h3>
+									</div>
+									<p>Learn from prominent industry experts and professionals through regular guest speaker sessions.</p>
+								</div>
+								<div class="feature-box">
+									<div class="feature-header">
+										<span class="icon solid major fa-laptop-code"></span>
+										<h3>Skill Development</h3>
+									</div>
+									<p>Hands-on training sessions to develop practical cybersecurity skills and knowledge.</p>
+								</div>
+								<div class="feature-box">
+									<div class="feature-header">
+										<span class="icon solid major fa-users"></span>
+										<h3>Networking</h3>
+									</div>
+									<p>Connect with like-minded individuals, professionals, and enthusiasts in the cybersecurity community.</p>
+								</div>
+								<div class="feature-box">
+									<div class="feature-header">
+										<span class="icon solid major fa-smile"></span>
+										<h3>Fun & Food</h3>
+									</div>
+									<p>Enjoy gaming sessions, good food, and social activities while building lasting connections in the security community.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+				<!-- Calendar -->
+					<section id="calendar" class="wrapper style2 fade-up">
+						<div class="inner">
+							<h2>Event Calendar</h2>
+							<p>Check out our upcoming cybersecurity events, workshops, and meetups!</p>
+							<div id="calendar-container">
+								<!-- Calendar will be rendered here -->
+							</div>
+						</div>
+					</section>
+
+				<!-- Sponsors -->
+					<section id="sponsors" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Our Sponsors</h2>
+							<p>We're proud to be supported by organizations that share our commitment to cybersecurity education and skill development.</p>
+							<div style="background: rgba(255, 255, 255, 0.05); padding: 3em; border-radius: 0.5em; margin: 2em auto; max-width: 800px; text-align: center;">
+								<h3>Become a Sponsor</h3>
+								<p style="margin: 1em 0 2em 0;">Sponsorship is a great way to support our mission and reach out to our members. Through sponsorship, your organization can help organize outreach events, give workshops, and more.</p>
+								<a href="#three" class="button">Contact Us About Sponsorship</a>
+							</div>
+						</div>
+					</section>
+
+				<!-- Contact -->
+					<section id="three" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Get in Touch</h2>
+							<p>Interested in joining MumbaiSec or have questions? Reach out to us!</p>
+							<div class="split style1">
+								<section>
+									<form method="post" action="#">
+										<div class="fields">
+											<div class="field half">
+												<label for="name">Name</label>
+												<input type="text" name="name" id="name" />
+											</div>
+											<div class="field half">
+												<label for="email">Email</label>
+												<input type="text" name="email" id="email" />
+											</div>
+											<div class="field">
+												<label for="message">Message</label>
+												<textarea name="message" id="message" rows="5"></textarea>
+											</div>
+										</div>
+										<ul class="actions">
+											<li><a href="" class="button submit">Send Message</a></li>
+										</ul>
+									</form>
+								</section>
+								<section>
+									<ul class="contact">
+										<li>
+											<h3>Location</h3>
+											<span>Mumbai, Maharashtra<br />
+											India</span>
+										</li>
+										<li>
+											<h3>Email</h3>
+											<span>admin@threatx.ai</span>
+										</li>
+										<li>
+											<h3>Social</h3>
+											<ul class="icons">
+												<li><a href="#" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
+												<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+												<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+											</ul>
+										</li>
+									</ul>
+								</section>
+							</div>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>© 2025 MumbaiSec. All rights reserved.</li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<!-- FullCalendar JS -->
+			<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+					var calendarEl = document.getElementById('calendar-container');
+					var calendar = new FullCalendar.Calendar(calendarEl, {
+						initialView: 'dayGridMonth',
+						height: 'auto',
+						headerToolbar: {
+							left: 'prev,next today',
+							center: 'title',
+							right: 'dayGridMonth,timeGridWeek,timeGridDay'
+						},
+						eventSources: [
+							// Manual events
+							{
+								events: [
+									{
+										title: 'Weekly Meetup',
+										start: '2025-03-01T18:00:00',
+										end: '2025-03-01T20:00:00'
+									},
+									{
+										title: 'CTF Competition',
+										start: '2025-03-15',
+										allDay: true
+									},
+									{
+										title: 'Web Security Workshop',
+										start: '2025-03-22T14:00:00',
+										end: '2025-03-22T17:00:00'
+									}
+								]
+							},
+							// Google Calendar events
+							{
+								googleCalendarId: 'fca8bf1779813e48ded08c32347f5d4ce4dca28c61bb82a8ef6aff5410eeb9a4@group.calendar.google.com',
+								googleCalendarApiKey: 'AIzaSyCDBSBu14psjkUJ1334bZdRuMt5dXM5F3o',
+								className: 'google-event',
+								failure: function(error) {
+									console.error('Google Calendar error:', error);
+								}
+							}
+						],
+						eventDidMount: function(info) {
+							
+						},
+						loading: function(isLoading) {
+							if (!isLoading) {
+								// Check for any sync errors
+								console.log('Calendar loaded');
+							}
+						}
+					});
+					calendar.render();
+				});
+			</script>
+
+	</body>
+</html>
