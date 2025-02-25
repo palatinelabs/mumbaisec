@@ -3,7 +3,7 @@
 	<head>
 		<title>MumbaiSec - Mumbai's Computer Security Club</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<!-- FullCalendar CSS -->
@@ -523,7 +523,7 @@
 		<!-- Modal for email confirmation -->
 		<div id="confirmation-modal" class="modal">
 			<div class="modal-content">
-				<span class="close">&times;</span>
+				<span class="close">×</span>
 				<h2>Thank You!</h2>
 				<p>Your message has been sent successfully to admin@threatx.ai. We'll get back to you soon!</p>
 				<button class="modal-button" id="modal-close-btn">Close</button>
@@ -542,190 +542,143 @@
 			<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 			
 			<!-- Email Form Script -->
-<script type="text/javascript">
-    // Initialize EmailJS
-    (function() {
-        // Replace with your EmailJS user ID
-        emailjs.init("lrsrduZJQAymOwmac");
-    })();
-    
-    // Modal functionality
-    window.onload = function() {
-        // Get the modal
-        var modal = document.getElementById("confirmation-modal");
-        
-        // Get the button that closes the modal
-        var closeBtn = document.getElementsByClassName("close")[0];
-        var modalCloseBtn = document.getElementById("modal-close-btn");
-        
-        // When the user clicks on (x), close the modal
-        closeBtn.onclick = function() {
-            modal.style.display = "none";
-        }
-        
-        // When the user clicks on the close button, close the modal
-        modalCloseBtn.onclick = function() {
-            modal.style.display = "none";
-        }
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-        
-        // Contact form submission
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Show loading spinner
-            document.getElementById('submit-text').style.display = 'none';
-            document.getElementById('spinner').style.display = 'block';
-            
-            // Get form data
-            var name = document.getElementById('name').value;
-            var email = document.getElementById('email').value;
-            var message = document.getElementById('message').value;
-            
-            // Prepare template parameters
-            var templateParams = {
-                from_name: name,
-                from_email: email,
-                message: message,
-                to_email: 'admin@threatx.ai'
-            };
-            
-            // Send email using EmailJS
-            emailjs.send('service_y17a7cs', 'template_rinr77q', templateParams)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    
-                    // Hide loading spinner
-                    document.getElementById('submit-text').style.display = 'inline';
-                    document.getElementById('spinner').style.display = 'none';
-                    
-                    // Reset form
-                    document.getElementById('contact-form').reset();
-                    
-                    // Show confirmation modal
-                    modal.style.display = "block";
-                }, function(error) {
-                    console.log('FAILED...', error);
-                    
-                    // Hide loading spinner
-                    document.getElementById('submit-text').style.display = 'inline';
-                    document.getElementById('spinner').style.display = 'none';
-                    
-                    // Alert error
-                    alert('Failed to send message. Please try again later.');
-                });
-        });
-    };
-</script>
-
-	</body>
-</html>('SUCCESS!', response.status, response.text);
-								
-								// Hide loading spinner
-								document.getElementById('submit-text').style.display = 'inline';
-								document.getElementById('spinner').style.display = 'none';
-								
-								// Reset form
-								document.getElementById('contact-form').reset();
-								
-								// Show confirmation modal
+			<script type="text/javascript">
+				// Initialize EmailJS
+				(function() {
+					emailjs.init("lrsrduZJQAymOwmac"); // Verify this is your correct EmailJS user ID
+				})();
+				
+				// Modal and Form functionality
+				document.addEventListener('DOMContentLoaded', function() {
+					// Modal elements
+					var modal = document.getElementById("confirmation-modal");
+					var closeBtn = document.getElementsByClassName("close")[0];
+					var modalCloseBtn = document.getElementById("modal-close-btn");
+					var form = document.getElementById('contact-form');
+					var submitText = document.getElementById('submit-text');
+					var spinner = document.getElementById('spinner');
+					
+					// Close modal handlers
+					closeBtn.onclick = function() {
+						modal.style.display = "none";
+					}
+					
+					modalCloseBtn.onclick = function() {
+						modal.style.display = "none";
+					}
+					
+					window.onclick = function(event) {
+						if (event.target == modal) {
+							modal.style.display = "none";
+						}
+					}
+					
+					// Form submission
+					form.addEventListener('submit', function(event) {
+						event.preventDefault();
+						
+						// Basic form validation
+						var name = document.getElementById('name').value.trim();
+						var email = document.getElementById('email').value.trim();
+						var message = document.getElementById('message').value.trim();
+						
+						if (!name || !email || !message) {
+							alert('Please fill in all fields');
+							return;
+						}
+						
+						if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+							alert('Please enter a valid email address');
+							return;
+						}
+						
+						// Show loading spinner
+						submitText.style.display = 'none';
+						spinner.style.display = 'block';
+						
+						// Prepare email parameters
+						var templateParams = {
+							from_name: name,
+							from_email: email,
+							message: message,
+							to_email: 'admin@threatx.ai'
+						};
+						
+						// Send email
+						emailjs.send('service_y17a7cs', 'template_rinr77q', templateParams)
+							.then(function(response) {
+								submitText.style.display = 'inline';
+								spinner.style.display = 'none';
+								form.reset();
 								modal.style.display = "block";
 							}, function(error) {
-								console.log('FAILED...', error);
-								
-								// Hide loading spinner
-								document.getElementById('submit-text').style.display = 'inline';
-								document.getElementById('spinner').style.display = 'none';
-								
-								// Alert error
-								alert('Failed to send message. Please try again later.');
+								submitText.style.display = 'inline';
+								spinner.style.display = 'none';
+								alert('Failed to send message. Error: ' + error.text);
 							});
 					});
-				};
+				});
 			</script>
 			
 			<!-- Calendar Script -->
-			<script>
+			<script type="text/javascript">
 			document.addEventListener('DOMContentLoaded', function() {
-				// Create and set up the calendar
 				var calendarEl = document.getElementById('calendar-container');
 				
-				// Create a custom rendering system for a pixel-perfect match
 				var calendar = new FullCalendar.Calendar(calendarEl, {
 					initialView: 'dayGridMonth',
-					initialDate: '2025-02-01', // Force February 2025
+					initialDate: '2025-02-01',
 					height: 'auto',
 					
-					// Custom header toolbar
 					headerToolbar: {
 						left: 'prev,next today',
 						center: 'title',
-						right: 'month week'
+						right: 'dayGridMonth,timeGridWeek'
 					},
 					
-					// Custom button text
 					buttonText: {
-						today: 'today',
+						today: 'Today',
 						month: 'Month',
 						week: 'Week'
 					},
 					
-					// Specific date formatting
 					dayHeaderFormat: { weekday: 'short' },
 					titleFormat: { year: 'numeric', month: 'long' },
-					
-					// Disable event limiting (show all events without +more)
 					dayMaxEventRows: false,
 					
-					// Event sources - combining local events with Google Calendar
 					eventSources: [
-						// Local events source - hardcoded events to match the screenshot
 						{
 							events: [
-								// Movie Night event
 								{
 									title: 'Movie Night',
 									start: '2025-02-02T17:30:00'
 								},
-								// Practical SMT Solvers event
 								{
 									title: 'Practical SMT Solvers',
 									start: '2025-02-05T17:00:00'
 								},
-								// AI/ML Security event
 								{
 									title: 'AI/ML Security',
 									start: '2025-02-12T17:00:00'
 								},
-								// Microarchitecture Security event
 								{
 									title: 'Microarchitecture Security',
 									start: '2025-02-19T17:00:00'
 								},
-								// Advanced OSINT event
 								{
 									title: 'Advanced OSINT',
 									start: '2025-02-26T16:30:00'
 								},
-								// Practical Malware Analysis event (same day as OSINT)
 								{
 									title: 'Practical Malware Analysis',
 									start: '2025-02-26T16:30:00'
 								},
-								// Weekly Meetup event
 								{
 									title: 'Weekly Meetup',
 									start: '2025-03-01T18:00:00'
 								}
 							]
 						},
-						// Google Calendar source - using your actual API key and Calendar ID
 						{
 							googleCalendarApiKey: 'AIzaSyCDBSBu14psjkUJ1334bZdRuMt5dXM5F3o',
 							googleCalendarId: 'fca8bf1779813e48ded08c32347f5d4ce4dca28c61bb82a8ef6aff5410eeb9a4@group.calendar.google.com',
@@ -737,14 +690,11 @@
 						}
 					],
 					
-					// Custom event rendering to match screenshot exactly
 					eventContent: function(info) {
-						// Format time to exactly match the screenshot (5p instead of 5:00 PM)
 						let start = info.event.start;
 						let hour = start.getHours();
 						let minute = start.getMinutes();
 						
-						// Format time as shown in screenshot (5p instead of 5:00 PM)
 						let timeStr = '';
 						if (hour === 0) {
 							timeStr = '12';
@@ -754,15 +704,11 @@
 							timeStr = hour.toString();
 						}
 						
-						// Add minutes if not zero
 						if (minute > 0) {
 							timeStr += ':' + (minute < 10 ? '0' : '') + minute;
 						}
-						
-						// Add a/p suffix
 						timeStr += (hour < 12) ? 'a' : 'p';
 						
-						// Create custom DOM elements for the event
 						let timeEl = document.createElement('span');
 						timeEl.classList.add('fc-event-time');
 						timeEl.innerText = timeStr;
@@ -770,7 +716,6 @@
 						let titleEl = document.createElement('span');
 						titleEl.classList.add('fc-event-title');
 						
-						// Handle specific event text to match screenshot exactly
 						if (info.event.title.includes('Movie Night')) {
 							titleEl.innerText = 'Movie Night';
 						} else if (info.event.title.includes('SMT')) {
@@ -792,30 +737,18 @@
 						return { domNodes: [timeEl, document.createTextNode(' '), titleEl] };
 					},
 					
-					// Handle day cell customization to match screenshot
 					dayCellDidMount: function(info) {
-						// Ensure day numbers appear exactly as in screenshot
 						let dayNumberEl = info.el.querySelector('.fc-daygrid-day-number');
 						if (dayNumberEl) {
 							dayNumberEl.style.float = 'right';
 							dayNumberEl.style.margin = '0';
 							dayNumberEl.style.paddingRight = '8px';
 						}
-					},
-					
-					// Error handling for Google Calendar integration
-					loading: function(isLoading) {
-						if (!isLoading) {
-							console.log('Calendar loaded successfully');
-						}
 					}
 				});
 				
-				// Render the calendar
 				calendar.render();
-				
-				// Debug helper - check for calendar loading issues
-				console.log('Calendar initialized. Check for any errors in the console.');
 			});
-			</script>
-            
+        </script>
+	</body>
+</html>
