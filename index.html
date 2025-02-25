@@ -473,7 +473,61 @@
 					// Disable event limiting (show all events without +more)
 					dayMaxEventRows: false,
 					
-					// Custom rendering for events
+					// Event sources - combining local events with Google Calendar
+					eventSources: [
+						// Local events source - hardcoded events to match the screenshot
+						{
+							events: [
+								// Movie Night event
+								{
+									title: 'Movie Night',
+									start: '2025-02-02T17:30:00'
+								},
+								// Practical SMT Solvers event
+								{
+									title: 'Practical SMT Solvers',
+									start: '2025-02-05T17:00:00'
+								},
+								// AI/ML Security event
+								{
+									title: 'AI/ML Security',
+									start: '2025-02-12T17:00:00'
+								},
+								// Microarchitecture Security event
+								{
+									title: 'Microarchitecture Security',
+									start: '2025-02-19T17:00:00'
+								},
+								// Advanced OSINT event
+								{
+									title: 'Advanced OSINT',
+									start: '2025-02-26T16:30:00'
+								},
+								// Practical Malware Analysis event (same day as OSINT)
+								{
+									title: 'Practical Malware Analysis',
+									start: '2025-02-26T16:30:00'
+								},
+								// Weekly Meetup event
+								{
+									title: 'Weekly Meetup',
+									start: '2025-03-01T18:00:00'
+								}
+							]
+						},
+						// Google Calendar source - using your actual API key and Calendar ID
+						{
+							googleCalendarApiKey: 'AIzaSyCDBSBu14psjkUJ1334bZdRuMt5dXM5F3o',
+							googleCalendarId: 'fca8bf1779813e48ded08c32347f5d4ce4dca28c61bb82a8ef6aff5410eeb9a4@group.calendar.google.com',
+							className: 'google-event',
+							color: 'rgba(88, 130, 193, 0.8)',
+							failure: function(error) {
+								console.error('Google Calendar error:', error);
+							}
+						}
+					],
+					
+					// Custom event rendering to match screenshot exactly
 					eventContent: function(info) {
 						// Format time to exactly match the screenshot (5p instead of 5:00 PM)
 						let start = info.event.start;
@@ -539,70 +593,19 @@
 						}
 					},
 					
-					// Events definition - exactly matching screenshot
-					events: [
-						// Movie Night event
-						{
-							title: 'Movie Night',
-							start: '2025-02-02T17:30:00'
-						},
-						// Practical SMT Solvers event
-						{
-							title: 'Practical SMT Solvers',
-							start: '2025-02-05T17:00:00'
-						},
-						// AI/ML Security event
-						{
-							title: 'AI/ML Security',
-							start: '2025-02-12T17:00:00'
-						},
-						// Microarchitecture Security event
-						{
-							title: 'Microarchitecture Security',
-							start: '2025-02-19T17:00:00'
-						},
-						// Advanced OSINT event
-						{
-							title: 'Advanced OSINT',
-							start: '2025-02-26T16:30:00'
-						},
-						// Practical Malware Analysis event (same day as OSINT)
-						{
-							title: 'Practical Malware Analysis',
-							start: '2025-02-26T16:30:00'
-						},
-						// Weekly Meetup event
-						{
-							title: 'Weekly Meetup',
-							start: '2025-03-01T18:00:00'
+					// Error handling for Google Calendar integration
+					loading: function(isLoading) {
+						if (!isLoading) {
+							console.log('Calendar loaded successfully');
 						}
-					]
+					}
 				});
 				
 				// Render the calendar
 				calendar.render();
 				
-				// Override specific elements for pixel-perfect match
-				setTimeout(function() {
-					// Remove certain buttons that might not be needed
-					document.querySelectorAll('.fc-more-popover').forEach(el => el.remove());
-					
-					// For Feb 26 - adjust the double events to match screenshot
-					const feb26Cell = document.querySelector('.fc-day[data-date="2025-02-26"]');
-					if (feb26Cell) {
-						const eventsContainer = feb26Cell.querySelector('.fc-daygrid-day-events');
-						if (eventsContainer) {
-							// Find events and adjust if needed for exact match
-							const events = eventsContainer.querySelectorAll('.fc-daygrid-event');
-							if (events.length > 1) {
-								// Ensure proper spacing
-								events.forEach(event => {
-									event.style.marginBottom = '3px';
-								});
-							}
-						}
-					}
-				}, 100);
+				// Debug helper - check for calendar loading issues
+				console.log('Calendar initialized. Check for any errors in the console.');
 			});
 			</script>
 
