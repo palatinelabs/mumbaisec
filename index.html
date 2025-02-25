@@ -8,6 +8,8 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<!-- FullCalendar CSS -->
 		<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css' rel='stylesheet' />
+		<!-- EmailJS Library -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 		<style>
 			body { background: #1e2937 !important; }
 			#sidebar { background: #1e2937 !important; }
@@ -182,6 +184,88 @@
 				font-size: 12px !important;
 				line-height: 1.3 !important;
 				cursor: pointer !important;
+			}
+			
+			/* Modal styles for email confirmation */
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 1000;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgba(0, 0, 0, 0.7);
+				transition: opacity 0.3s ease;
+			}
+			
+			.modal-content {
+				background-color: #2b4465;
+				margin: 15% auto;
+				padding: 20px;
+				border: 1px solid #4c6b9a;
+				border-radius: 5px;
+				width: 70%;
+				max-width: 500px;
+				color: white;
+				text-align: center;
+				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+			}
+			
+			.close {
+				color: #aaa;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+			
+			.close:hover,
+			.close:focus {
+				color: white;
+				text-decoration: none;
+			}
+			
+			.modal h2 {
+				margin-top: 0;
+				color: white;
+			}
+			
+			.modal p {
+				margin-bottom: 1em;
+			}
+			
+			.modal-button {
+				background-color: #4c6b9a;
+				color: white;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 4px;
+				cursor: pointer;
+				font-weight: bold;
+				transition: background-color 0.3s ease;
+			}
+			
+			.modal-button:hover {
+				background-color: #5d7cad;
+			}
+			
+			/* Loading indicator */
+			.spinner {
+				display: none;
+				margin: 0 auto;
+				border: 4px solid rgba(255, 255, 255, 0.3);
+				border-radius: 50%;
+				border-top: 4px solid #ffffff;
+				width: 20px;
+				height: 20px;
+				animation: spin 1s linear infinite;
+			}
+			
+			@keyframes spin {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
 			}
 		</style>
 	</head>
@@ -375,23 +459,28 @@
 							<p>Interested in joining MumbaiSec or have questions? Reach out to us!</p>
 							<div class="split style1">
 								<section>
-									<form method="post" action="#">
+									<form id="contact-form">
 										<div class="fields">
 											<div class="field half">
 												<label for="name">Name</label>
-												<input type="text" name="name" id="name" />
+												<input type="text" name="name" id="name" required />
 											</div>
 											<div class="field half">
 												<label for="email">Email</label>
-												<input type="text" name="email" id="email" />
+												<input type="email" name="email" id="email" required />
 											</div>
 											<div class="field">
 												<label for="message">Message</label>
-												<textarea name="message" id="message" rows="5"></textarea>
+												<textarea name="message" id="message" rows="5" required></textarea>
 											</div>
 										</div>
 										<ul class="actions">
-											<li><a href="" class="button submit">Send Message</a></li>
+											<li>
+												<button type="submit" class="button submit">
+													<span id="submit-text">Send Message</span>
+													<div id="spinner" class="spinner"></div>
+												</button>
+											</li>
 										</ul>
 									</form>
 								</section>
@@ -430,6 +519,16 @@
 					</ul>
 				</div>
 			</footer>
+			
+		<!-- Modal for email confirmation -->
+		<div id="confirmation-modal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2>Thank You!</h2>
+				<p>Your message has been sent successfully to admin@threatx.ai. We'll get back to you soon!</p>
+				<button class="modal-button" id="modal-close-btn">Close</button>
+			</div>
+		</div>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -441,6 +540,117 @@
 			<script src="assets/js/main.js"></script>
 			<!-- FullCalendar JS -->
 			<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+			
+			<!-- Email Form Script -->
+<script type="text/javascript">
+    // Initialize EmailJS
+    (function() {
+        // Replace with your EmailJS user ID
+        emailjs.init("lrsrduZJQAymOwmac");
+    })();
+    
+    // Modal functionality
+    window.onload = function() {
+        // Get the modal
+        var modal = document.getElementById("confirmation-modal");
+        
+        // Get the button that closes the modal
+        var closeBtn = document.getElementsByClassName("close")[0];
+        var modalCloseBtn = document.getElementById("modal-close-btn");
+        
+        // When the user clicks on (x), close the modal
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        // When the user clicks on the close button, close the modal
+        modalCloseBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+        // Contact form submission
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Show loading spinner
+            document.getElementById('submit-text').style.display = 'none';
+            document.getElementById('spinner').style.display = 'block';
+            
+            // Get form data
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var message = document.getElementById('message').value;
+            
+            // Prepare template parameters
+            var templateParams = {
+                from_name: name,
+                from_email: email,
+                message: message,
+                to_email: 'admin@threatx.ai'
+            };
+            
+            // Send email using EmailJS
+            emailjs.send('service_y17a7cs', 'template_rinr77q', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    
+                    // Hide loading spinner
+                    document.getElementById('submit-text').style.display = 'inline';
+                    document.getElementById('spinner').style.display = 'none';
+                    
+                    // Reset form
+                    document.getElementById('contact-form').reset();
+                    
+                    // Show confirmation modal
+                    modal.style.display = "block";
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    
+                    // Hide loading spinner
+                    document.getElementById('submit-text').style.display = 'inline';
+                    document.getElementById('spinner').style.display = 'none';
+                    
+                    // Alert error
+                    alert('Failed to send message. Please try again later.');
+                });
+        });
+    };
+</script>
+
+	</body>
+</html>('SUCCESS!', response.status, response.text);
+								
+								// Hide loading spinner
+								document.getElementById('submit-text').style.display = 'inline';
+								document.getElementById('spinner').style.display = 'none';
+								
+								// Reset form
+								document.getElementById('contact-form').reset();
+								
+								// Show confirmation modal
+								modal.style.display = "block";
+							}, function(error) {
+								console.log('FAILED...', error);
+								
+								// Hide loading spinner
+								document.getElementById('submit-text').style.display = 'inline';
+								document.getElementById('spinner').style.display = 'none';
+								
+								// Alert error
+								alert('Failed to send message. Please try again later.');
+							});
+					});
+				};
+			</script>
+			
+			<!-- Calendar Script -->
 			<script>
 			document.addEventListener('DOMContentLoaded', function() {
 				// Create and set up the calendar
@@ -608,6 +818,4 @@
 				console.log('Calendar initialized. Check for any errors in the console.');
 			});
 			</script>
-
-	</body>
-</html>
+            
