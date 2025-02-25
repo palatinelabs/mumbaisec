@@ -525,7 +525,7 @@
 			<div class="modal-content">
 				<span class="close">×</span>
 				<h2>Thank You!</h2>
-				<p>Your message has been sent successfully to admin@threatx.ai. We'll get back to you soon!</p>
+				<p>Your message has been sent successfully. We'll get back to you soon!</p>
 				<button class="modal-button" id="modal-close-btn">Close</button>
 			</div>
 		</div>
@@ -601,7 +601,8 @@
 							from_name: name,
 							from_email: email,
 							message: message,
-							to_email: 'admin@threatx.ai'
+							to_name: 'MumbaiSec Admin', // Adjust this value as needed
+							reply_to: email
 						};
 						
 						// Send email
@@ -749,6 +750,6 @@
 				
 				calendar.render();
 			});
-        </script>
+			</script>
 	</body>
 </html>
