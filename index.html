@@ -339,7 +339,7 @@
 				height: auto !important;
 			}
 
-			/* FIX: Calendar container dimensions - IMPORTANT CHANGE */
+			/* FIX: Calendar container dimensions */
 			#calendar-container {
 				width: 100% !important;
 				max-width: 900px !important;
@@ -386,54 +386,35 @@
 				clear: both !important;
 			}
 
-			/* NEW: Enhanced footer styles */
+			/* Simplified footer styles */
 			#footer {
-				padding: 4em 0 2em 0 !important;
+				padding: 3em 0 2em 0 !important;
 				background-color: #1a2530 !important;
 				width: 100% !important;
+				overflow: hidden !important;
 			}
 
-			.footer-container {
-				display: grid !important;
-				grid-template-columns: repeat(3, 1fr) !important;
-				gap: 2em !important;
-				padding-bottom: 2em !important;
+			.footer-subscribe {
+				max-width: 600px !important;
+				margin: 0 auto 2em auto !important;
+				text-align: center !important;
 			}
 
-			.footer-section h3 {
+			.footer-subscribe h3 {
 				font-size: 1.2em !important;
-				margin-bottom: 1em !important;
-				color: white !important;
-			}
-
-			.footer-section p {
-				color: rgba(255, 255, 255, 0.7) !important;
-				margin-bottom: 1em !important;
-			}
-
-			.footer-section ul {
-				list-style: none !important;
-				margin: 0 !important;
-				padding: 0 !important;
-			}
-
-			.footer-section ul li {
 				margin-bottom: 0.5em !important;
-			}
-
-			.footer-section ul li a {
-				color: rgba(255, 255, 255, 0.7) !important;
-				text-decoration: none !important;
-			}
-
-			.footer-section ul li a:hover {
 				color: white !important;
-				text-decoration: underline !important;
+			}
+
+			.footer-subscribe p {
+				color: rgba(255, 255, 255, 0.7) !important;
+				margin-bottom: 1em !important;
 			}
 
 			.subscribe-form {
 				display: flex !important;
-				margin-top: 1em !important;
+				margin: 1em auto !important;
+				max-width: 500px !important;
 			}
 
 			.subscribe-form input[type="email"] {
@@ -459,28 +440,36 @@
 				background-color: #5d7cad !important;
 			}
 
-			.footer-bottom {
-				border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-				padding-top: 2em !important;
-				text-align: center !important;
-				color: rgba(255, 255, 255, 0.5) !important;
-			}
-
-			@media screen and (max-width: 980px) {
-				.footer-container {
-					grid-template-columns: 1fr !important;
-				}
-			}
-
-			/* NEW: Subscription success message */
 			#subscription-success {
 				display: none;
-				margin-top: 1em;
+				margin: 1em auto;
 				padding: 0.5em;
 				background-color: rgba(46, 204, 113, 0.2);
 				color: #2ecc71;
 				border-radius: 3px;
 				text-align: center;
+				max-width: 500px;
+			}
+
+			.footer-bottom {
+				border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+				padding-top: 1em !important;
+				text-align: center !important;
+				color: rgba(255, 255, 255, 0.5) !important;
+			}
+
+			/* Mobile responsiveness for footer */
+			@media screen and (max-width: 736px) {
+				.subscribe-form {
+					flex-direction: column !important;
+					gap: 0.5em !important;
+				}
+				
+				.subscribe-form input[type="email"],
+				.subscribe-form button {
+					width: 100% !important;
+					border-radius: 3px !important;
+				}
 			}
 		</style>
 	</head>
@@ -679,8 +668,7 @@
 											<div class="field half">
 												<label for="name">Name</label>
 												<input type="text" name="name" id="name" required />
-											</div>
-											<div class="field half">
+											</div<div class="field half">
 												<label for="email">Email</label>
 												<input type="email" name="email" id="email" required />
 											</div>
@@ -726,48 +714,25 @@
 
 			</div>
 
-		<!-- Footer -->
-			<footer id="footer" class="wrapper style1-alt">
-				<div class="inner">
-					<div class="footer-container">
-						<div class="footer-section">
-							<h3>About MumbaiSec</h3>
-							<p>MumbaiSec is a community of cybersecurity enthusiasts, professionals, and learners dedicated to promoting cybersecurity awareness and skills development in Mumbai and beyond.</p>
-							<ul class="icons">
-								<li><a href="#" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
-								<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							</ul>
-						</div>
-						<div class="footer-section">
-							<h3>Quick Links</h3>
-							<ul>
-								<li><a href="#intro">Home</a></li>
-								<li><a href="#one">About Us</a></li>
-								<li><a href="#activities">Activities</a></li>
-								<li><a href="#calendar">Event Calendar</a></li>
-								<li><a href="#sponsors">Sponsorship</a></li>
-								<li><a href="#three">Contact</a></li>
-							</ul>
-						</div>
-						<div class="footer-section">
-							<h3>Subscribe to Our Newsletter</h3>
-							<p>Stay updated with our latest events, workshops, and cybersecurity news.</p>
-							<form id="subscribe-form" class="subscribe-form">
-								<input type="email" id="subscribe-email" placeholder="Your email address" required>
-								<button type="submit">Subscribe</button>
-							</form>
-							<div id="subscription-success">
-								Thanks for subscribing! You'll receive our next newsletter.
-							</div>
-						</div>
-					</div>
-					<div class="footer-bottom">
-						<p>© 2025 MumbaiSec. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+		<!-- Footer with simplified layout - only subscription -->
+		<footer id="footer" class="wrapper style1-alt">
+			<div class="inner">
+				<div class="footer-subscribe">
+					<h3>Subscribe to Our Newsletter</h3>
+					<p>Stay updated with our latest events, workshops, and cybersecurity news.</p>
+					<form id="subscribe-form" class="subscribe-form">
+						<input type="email" id="subscribe-email" placeholder="Your email address" required>
+						<button type="submit">Subscribe</button>
+					</form>
+					<div id="subscription-success">
+						Thanks for subscribing! You'll receive our next newsletter.
 					</div>
 				</div>
-			</footer>
+				<div class="footer-bottom">
+					<p>© 2025 MumbaiSec. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+				</div>
+			</div>
+		</footer>
 			
 		<!-- Modal for email confirmation -->
 		<div id="confirmation-modal" class="modal">
@@ -795,8 +760,7 @@
 				// Initialize EmailJS
 				(function() {
 					emailjs.init("lrsrduZJQAymOwmac"); // Verify this is your correct EmailJS user ID
-				})
-				();
+				})();
 				
 				// Modal and Form functionality
 				document.addEventListener('DOMContentLoaded', function() {
