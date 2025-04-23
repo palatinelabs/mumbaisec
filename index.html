@@ -13,6 +13,7 @@
 		<style>
 			body { background: #1e2937 !important; }
 			#sidebar { background: #1e2937 !important; }
+			#wrapper { background: #1e2937 !important; } /* Added to fix right-side background */
 			.wrapper.style1 { background-color: #4c6b9a !important; }
 			.wrapper.style2 { background-color: #2b4465 !important; }
 			.wrapper.style3 { background-color: #4c6b9a !important; }
@@ -266,6 +267,25 @@
 			@keyframes spin {
 				0% { transform: rotate(0deg); }
 				100% { transform: rotate(360deg); }
+			}
+
+			/* Fix for section layouts */
+			section.wrapper {
+				width: 100%;
+				clear: both;
+				margin: 0;
+				padding: 0;
+			}
+			
+			/* Fix for content containers */
+			.spotlights > section {
+				width: 100%;
+				margin: 0;
+			}
+			
+			/* Ensure proper content width */
+			.content {
+				width: 100%;
 			}
 		</style>
 	</head>
@@ -626,129 +646,130 @@
 			document.addEventListener('DOMContentLoaded', function() {
 				var calendarEl = document.getElementById('calendar-container');
 				
-				var calendar = new FullCalendar.Calendar(calendarEl, {
-					initialView: 'dayGridMonth',
-					initialDate: '2025-02-01',
-					height: 'auto',
-					
-					headerToolbar: {
-						left: 'prev,next today',
-						center: 'title',
-						right: 'dayGridMonth,timeGridWeek'
-					},
-					
-					buttonText: {
-						today: 'Today',
-						month: 'Month',
-						week: 'Week'
-					},
-					
-					dayHeaderFormat: { weekday: 'short' },
-					titleFormat: { year: 'numeric', month: 'long' },
-					dayMaxEventRows: false,
-					
-					eventSources: [
-						{
-							events: [
-								{
-									title: 'Movie Night',
-									start: '2025-02-02T17:30:00'
-								},
-								{
-									title: 'Practical SMT Solvers',
-									start: '2025-02-05T17:00:00'
-								},
-								{
-									title: 'AI/ML Security',
-									start: '2025-02-12T17:00:00'
-								},
-								{
-									title: 'Microarchitecture Security',
-									start: '2025-02-19T17:00:00'
-								},
-								{
-									title: 'Advanced OSINT',
-									start: '2025-02-26T16:30:00'
-								},
-								{
-									title: 'Practical Malware Analysis',
-									start: '2025-02-26T16:30:00'
-								},
-								{
-									title: 'Weekly Meetup',
-									start: '2025-03-01T18:00:00'
-								}
-							]
+				if (!calendarEl) {
+					console.error('Calendar container not found!');
+					return;
+				}
+				
+				try {
+					var calendar = new FullCalendar.Calendar(calendarEl, {
+						initialView: 'dayGridMonth',
+						initialDate: '2025-02-01',
+						height: 'auto',
+						
+						headerToolbar: {
+							left: 'prev,next today',
+							center: 'title',
+							right: 'dayGridMonth,timeGridWeek'
 						},
-						{
-							googleCalendarApiKey: 'AIzaSyCDBSBu14psjkUJ1334bZdRuMt5dXM5F3o',
-							googleCalendarId: 'fca8bf1779813e48ded08c32347f5d4ce4dca28c61bb82a8ef6aff5410eeb9a4@group.calendar.google.com',
-							className: 'google-event',
-							color: 'rgba(88, 130, 193, 0.8)',
-							failure: function(error) {
-								console.error('Google Calendar error:', error);
+						
+						buttonText: {
+							today: 'Today',
+							month: 'Month',
+							week: 'Week'
+						},
+						
+						dayHeaderFormat: { weekday: 'short' },
+						titleFormat: { year: 'numeric', month: 'long' },
+						dayMaxEventRows: false,
+						
+						eventSources: [
+							{
+								events: [
+									{
+										title: 'Movie Night',
+										start: '2025-02-02T17:30:00'
+									},
+									{
+										title: 'Practical SMT Solvers',
+										start: '2025-02-05T17:00:00'
+									},
+									{
+										title: 'AI/ML Security',
+										start: '2025-02-12T17:00:00'
+									},
+									{
+										title: 'Microarchitecture Security',
+										start: '2025-02-19T17:00:00'
+									},
+									{
+										title: 'Advanced OSINT',
+										start: '2025-02-26T16:30:00'
+									},
+									{
+										title: 'Practical Malware Analysis',
+										start: '2025-02-26T16:30:00'
+									},
+									{
+										title: 'Weekly Meetup',
+										start: '2025-03-01T18:00:00'
+									}
+								]
+							}
+						],
+						
+						eventContent: function(info) {
+							let start = info.event.start;
+							let hour = start.getHours();
+							let minute = start.getMinutes();
+							
+							let timeStr = '';
+							if (hour === 0) {
+								timeStr = '12';
+							} else if (hour > 12) {
+								timeStr = (hour - 12).toString();
+							} else {
+								timeStr = hour.toString();
+							}
+							
+							if (minute > 0) {
+								timeStr += ':' + (minute < 10 ? '0' : '') + minute;
+							}
+							timeStr += (hour < 12) ? 'a' : 'p';
+							
+							let timeEl = document.createElement('span');
+							timeEl.classList.add('fc-event-time');
+							timeEl.innerText = timeStr;
+							
+							let titleEl = document.createElement('span');
+							titleEl.classList.add('fc-event-title');
+							
+							if (info.event.title.includes('Movie Night')) {
+								titleEl.innerText = 'Movie Night';
+							} else if (info.event.title.includes('SMT')) {
+								titleEl.innerText = 'Practical SMT Solvers';
+							} else if (info.event.title.includes('AI/ML')) {
+								titleEl.innerText = 'AI/ML Security';
+							} else if (info.event.title.includes('Microarchitecture')) {
+								titleEl.innerText = 'Micro Security';
+							} else if (info.event.title.includes('Advanced OSINT')) {
+								titleEl.innerText = 'Advanced OSINT';
+							} else if (info.event.title.includes('Malware Analysis')) {
+								titleEl.innerText = 'Practical Malware Analysis';
+							} else if (info.event.title.includes('Weekly')) {
+								titleEl.innerText = 'Weekly Meetup';
+							} else {
+								titleEl.innerText = info.event.title;
+							}
+							
+							return { domNodes: [timeEl, document.createTextNode(' '), titleEl] };
+						},
+						
+						dayCellDidMount: function(info) {
+							let dayNumberEl = info.el.querySelector('.fc-daygrid-day-number');
+							if (dayNumberEl) {
+								dayNumberEl.style.float = 'right';
+								dayNumberEl.style.margin = '0';
+								dayNumberEl.style.paddingRight = '8px';
 							}
 						}
-					],
+					});
 					
-					eventContent: function(info) {
-						let start = info.event.start;
-						let hour = start.getHours();
-						let minute = start.getMinutes();
-						
-						let timeStr = '';
-						if (hour === 0) {
-							timeStr = '12';
-						} else if (hour > 12) {
-							timeStr = (hour - 12).toString();
-						} else {
-							timeStr = hour.toString();
-						}
-						
-						if (minute > 0) {
-							timeStr += ':' + (minute < 10 ? '0' : '') + minute;
-						}
-						timeStr += (hour < 12) ? 'a' : 'p';
-						
-						let timeEl = document.createElement('span');
-						timeEl.classList.add('fc-event-time');
-						timeEl.innerText = timeStr;
-						
-						let titleEl = document.createElement('span');
-						titleEl.classList.add('fc-event-title');
-						
-						if (info.event.title.includes('Movie Night')) {
-							titleEl.innerText = 'Movie Night';
-						} else if (info.event.title.includes('SMT')) {
-							titleEl.innerText = 'Practical SMT Solvers';
-						} else if (info.event.title.includes('AI/ML')) {
-							titleEl.innerText = 'AI/ML Security';
-						} else if (info.event.title.includes('Microarchitecture')) {
-							titleEl.innerText = 'Micro Security';
-						} else if (info.event.title.includes('Advanced OSINT')) {
-							titleEl.innerText = 'Advanced OSINT';
-						} else if (info.event.title.includes('Malware Analysis')) {
-							titleEl.innerText = 'Practical Malware Analysis';
-						} else if (info.event.title.includes('Weekly')) {
-							titleEl.innerText = 'Weekly Meetup';
-						} else {
-							titleEl.innerText = info.event.title;
-						}
-						
-						return { domNodes: [timeEl, document.createTextNode(' '), titleEl] };
-					},
-					
-					dayCellDidMount: function(info) {
-						let dayNumberEl = info.el.querySelector('.fc-daygrid-day-number');
-						if (dayNumberEl) {
-							dayNumberEl.style.float = 'right';
-							dayNumberEl.style.margin = '0';
-							dayNumberEl.style.paddingRight = '8px';
-						}
-					}
-				});
-				
-				calendar.render();
+					calendar.render();
+					console.log('Calendar successfully rendered');
+				} catch (error) {
+					console.error('Error initializing calendar:', error);
+				}
 			});
 			</script>
 	</body>
