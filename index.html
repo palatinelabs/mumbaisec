@@ -339,13 +339,13 @@
 				height: auto !important;
 			}
 
-			/* FIX: Calendar container dimensions */
+			/* FIX: Calendar container dimensions - IMPORTANT CHANGE */
 			#calendar-container {
 				width: 100% !important;
 				max-width: 900px !important;
-				height: 600px !important;
+				height: 700px !important; /* Increased height to show full calendar */
 				margin: 2em auto !important;
-				overflow: hidden !important;
+				overflow: visible !important; /* Changed from hidden to visible */
 			}
 
 			/* FIX: Mobile responsiveness */
@@ -384,6 +384,103 @@
 				content: "" !important;
 				display: table !important;
 				clear: both !important;
+			}
+
+			/* NEW: Enhanced footer styles */
+			#footer {
+				padding: 4em 0 2em 0 !important;
+				background-color: #1a2530 !important;
+				width: 100% !important;
+			}
+
+			.footer-container {
+				display: grid !important;
+				grid-template-columns: repeat(3, 1fr) !important;
+				gap: 2em !important;
+				padding-bottom: 2em !important;
+			}
+
+			.footer-section h3 {
+				font-size: 1.2em !important;
+				margin-bottom: 1em !important;
+				color: white !important;
+			}
+
+			.footer-section p {
+				color: rgba(255, 255, 255, 0.7) !important;
+				margin-bottom: 1em !important;
+			}
+
+			.footer-section ul {
+				list-style: none !important;
+				margin: 0 !important;
+				padding: 0 !important;
+			}
+
+			.footer-section ul li {
+				margin-bottom: 0.5em !important;
+			}
+
+			.footer-section ul li a {
+				color: rgba(255, 255, 255, 0.7) !important;
+				text-decoration: none !important;
+			}
+
+			.footer-section ul li a:hover {
+				color: white !important;
+				text-decoration: underline !important;
+			}
+
+			.subscribe-form {
+				display: flex !important;
+				margin-top: 1em !important;
+			}
+
+			.subscribe-form input[type="email"] {
+				flex: 1 !important;
+				padding: 0.5em 1em !important;
+				border: none !important;
+				border-radius: 3px 0 0 3px !important;
+				background-color: rgba(255, 255, 255, 0.1) !important;
+				color: white !important;
+			}
+
+			.subscribe-form button {
+				padding: 0.5em 1em !important;
+				border: none !important;
+				border-radius: 0 3px 3px 0 !important;
+				background-color: #4c6b9a !important;
+				color: white !important;
+				cursor: pointer !important;
+				transition: background-color 0.3s ease !important;
+			}
+
+			.subscribe-form button:hover {
+				background-color: #5d7cad !important;
+			}
+
+			.footer-bottom {
+				border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+				padding-top: 2em !important;
+				text-align: center !important;
+				color: rgba(255, 255, 255, 0.5) !important;
+			}
+
+			@media screen and (max-width: 980px) {
+				.footer-container {
+					grid-template-columns: 1fr !important;
+				}
+			}
+
+			/* NEW: Subscription success message */
+			#subscription-success {
+				display: none;
+				margin-top: 1em;
+				padding: 0.5em;
+				background-color: rgba(46, 204, 113, 0.2);
+				color: #2ecc71;
+				border-radius: 3px;
+				text-align: center;
 			}
 		</style>
 	</head>
@@ -632,9 +729,43 @@
 		<!-- Footer -->
 			<footer id="footer" class="wrapper style1-alt">
 				<div class="inner">
-					<ul class="menu">
-						<li>© 2025 MumbaiSec. All rights reserved.</li>
-					</ul>
+					<div class="footer-container">
+						<div class="footer-section">
+							<h3>About MumbaiSec</h3>
+							<p>MumbaiSec is a community of cybersecurity enthusiasts, professionals, and learners dedicated to promoting cybersecurity awareness and skills development in Mumbai and beyond.</p>
+							<ul class="icons">
+								<li><a href="#" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
+								<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							</ul>
+						</div>
+						<div class="footer-section">
+							<h3>Quick Links</h3>
+							<ul>
+								<li><a href="#intro">Home</a></li>
+								<li><a href="#one">About Us</a></li>
+								<li><a href="#activities">Activities</a></li>
+								<li><a href="#calendar">Event Calendar</a></li>
+								<li><a href="#sponsors">Sponsorship</a></li>
+								<li><a href="#three">Contact</a></li>
+							</ul>
+						</div>
+						<div class="footer-section">
+							<h3>Subscribe to Our Newsletter</h3>
+							<p>Stay updated with our latest events, workshops, and cybersecurity news.</p>
+							<form id="subscribe-form" class="subscribe-form">
+								<input type="email" id="subscribe-email" placeholder="Your email address" required>
+								<button type="submit">Subscribe</button>
+							</form>
+							<div id="subscription-success">
+								Thanks for subscribing! You'll receive our next newsletter.
+							</div>
+						</div>
+					</div>
+					<div class="footer-bottom">
+						<p>© 2025 MumbaiSec. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+					</div>
 				</div>
 			</footer>
 			
@@ -664,7 +795,8 @@
 				// Initialize EmailJS
 				(function() {
 					emailjs.init("lrsrduZJQAymOwmac"); // Verify this is your correct EmailJS user ID
-				})();
+				})
+				();
 				
 				// Modal and Form functionality
 				document.addEventListener('DOMContentLoaded', function() {
@@ -736,6 +868,36 @@
 								alert('Failed to send message. Error: ' + error.text);
 							});
 					});
+
+					// Newsletter subscription form
+					var subscribeForm = document.getElementById('subscribe-form');
+					var subscriptionSuccess = document.getElementById('subscription-success');
+
+					subscribeForm.addEventListener('submit', function(event) {
+						event.preventDefault();
+						
+						var email = document.getElementById('subscribe-email').value.trim();
+						
+						if (!email) {
+							alert('Please enter your email address');
+							return;
+						}
+						
+						if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+							alert('Please enter a valid email address');
+							return;
+						}
+						
+						// In a real implementation, you would send this to your server or email service
+						// For this demo, we'll just show the success message
+						subscribeForm.reset();
+						subscriptionSuccess.style.display = 'block';
+						
+						// Hide the success message after 5 seconds
+						setTimeout(function() {
+							subscriptionSuccess.style.display = 'none';
+						}, 5000);
+					});
 				});
 			</script>
 			
@@ -753,7 +915,7 @@
 					var calendar = new FullCalendar.Calendar(calendarEl, {
 						initialView: 'dayGridMonth',
 						initialDate: '2025-02-01',
-						height: 'auto',
+						height: 650, // Explicitly set height to show entire month
 						
 						headerToolbar: {
 							left: 'prev,next today',
@@ -769,7 +931,7 @@
 						
 						dayHeaderFormat: { weekday: 'short' },
 						titleFormat: { year: 'numeric', month: 'long' },
-						dayMaxEventRows: false,
+						dayMaxEvents: 3, // Limit events shown per day
 						
 						eventSources: [
 							{
@@ -859,6 +1021,15 @@
 								dayNumberEl.style.float = 'right';
 								dayNumberEl.style.margin = '0';
 								dayNumberEl.style.paddingRight = '8px';
+							}
+						},
+						
+						// Make sure calendar is fully visible
+						viewDidMount: function() {
+							if (calendar) {
+								setTimeout(function() {
+									calendar.updateSize(); // Force a resize after rendering
+								}, 100);
 							}
 						}
 					});
