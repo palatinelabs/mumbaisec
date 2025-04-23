@@ -186,6 +186,11 @@
 				cursor: pointer !important;
 			}
 			
+			/* Google Calendar events style - helps distinguish them */
+			.google-event {
+				background-color: rgba(139, 195, 74, 0.8) !important;
+			}
+			
 			/* Modal styles for email confirmation */
 			.modal {
 				display: none;
@@ -471,6 +476,35 @@
 					border-radius: 3px !important;
 				}
 			}
+			
+			/* Legend for calendar events */
+			.calendar-legend {
+				display: flex;
+				justify-content: center;
+				margin-top: 1em;
+				gap: 2em;
+			}
+			
+			.legend-item {
+				display: flex;
+				align-items: center;
+				font-size: 0.9em;
+			}
+			
+			.legend-color {
+				width: 16px;
+				height: 16px;
+				border-radius: 3px;
+				margin-right: 0.5em;
+			}
+			
+			.legend-default {
+				background-color: rgba(88, 130, 193, 0.8);
+			}
+			
+			.legend-google {
+				background-color: rgba(139, 195, 74, 0.8);
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -633,12 +667,23 @@
 					</section>
 
 				<!-- Calendar -->
-					<section id="calendar" class="wrapper style2 fade-up">
+					<section id="calendar" class="wrapperstyle2 fade-up">
 						<div class="inner">
 							<h2>Event Calendar</h2>
 							<p>Check out our upcoming cybersecurity events, workshops, and meetups!</p>
 							<div id="calendar-container">
 								<!-- Calendar will be rendered here -->
+							</div>
+							<!-- Calendar Legend -->
+							<div class="calendar-legend">
+								<div class="legend-item">
+									<div class="legend-color legend-default"></div>
+									<span>Website Events</span>
+								</div>
+								<div class="legend-item">
+									<div class="legend-color legend-google"></div>
+									<span>Google Calendar Events</span>
+								</div>
 							</div>
 						</div>
 					</section>
@@ -668,7 +713,8 @@
 											<div class="field half">
 												<label for="name">Name</label>
 												<input type="text" name="name" id="name" required />
-											</div<div class="field half">
+											</div>
+											<div class="field half">
 												<label for="email">Email</label>
 												<input type="email" name="email" id="email" required />
 											</div>
@@ -696,7 +742,7 @@
 										</li>
 										<li>
 											<h3>Email</h3>
-											<span>admin@threatx.ai</span>
+											<span>yajwinjain@gmail.com</span>
 										</li>
 										<li>
 											<h3>Social</h3>
@@ -713,6 +759,26 @@
 					</section>
 
 			</div>
+
+		<!-- Footer with simplified layout - only subscription -->
+		<footer id="footer" class="wrapper style1-alt">
+			<div class="inner">
+				<div class="footer-subscribe">
+					<h3>Subscribe to Our Newsletter</h3>
+					<p>Stay updated with our latest events, workshops, and cybersecurity news.</p>
+					<form id="subscribe-form" class="subscribe-form">
+						<input type="email" id="subscribe-email" placeholder="Your email address" required>
+						<button type="submit">Subscribe</button>
+					</form>
+					<div id="subscription-success">
+						Thanks for subscribing! You'll receive our next newsletter.
+					</div>
+				</div>
+				<div class="footer-bottom">
+					<p>© 2025 MumbaiSec. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+				</div>
+			</div>
+		</footer>
 			
 		<!-- Modal for email confirmation -->
 		<div id="confirmation-modal" class="modal">
@@ -795,8 +861,9 @@
 							from_name: name,
 							from_email: email,
 							message: message,
-							to_name: 'MumbaiSec Admin', // Adjust this value as needed
-							reply_to: email
+							to_name: 'MumbaiSec Admin',
+							reply_to: email,
+							to_email: 'yajwinjain@gmail.com' // Send emails to this address
 						};
 						
 						// Send email
@@ -817,31 +884,45 @@
 					var subscribeForm = document.getElementById('subscribe-form');
 					var subscriptionSuccess = document.getElementById('subscription-success');
 
-					subscribeForm.addEventListener('submit', function(event) {
-						event.preventDefault();
-						
-						var email = document.getElementById('subscribe-email').value.trim();
-						
-						if (!email) {
-							alert('Please enter your email address');
-							return;
-						}
-						
-						if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-							alert('Please enter a valid email address');
-							return;
-						}
-						
-						// In a real implementation, you would send this to your server or email service
-						// For this demo, we'll just show the success message
-						subscribeForm.reset();
-						subscriptionSuccess.style.display = 'block';
-						
-						// Hide the success message after 5 seconds
-						setTimeout(function() {
-							subscriptionSuccess.style.display = 'none';
-						}, 5000);
-					});
+					if (subscribeForm) {
+						subscribeForm.addEventListener('submit', function(event) {
+							event.preventDefault();
+							
+							var email = document.getElementById('subscribe-email').value.trim();
+							
+							if (!email) {
+								alert('Please enter your email address');
+								return;
+							}
+							
+							if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+								alert('Please enter a valid email address');
+								return;
+							}
+							
+							// Newsletter subscription parameters
+							var subscribeParams = {
+								from_email: email,
+								to_email: 'yajwinjain@gmail.com', // Send to this email
+								subscription_type: 'MumbaiSec Newsletter',
+								message: 'New newsletter subscription request'
+							};
+							
+							// Send the subscription email
+							emailjs.send('service_y17a7cs', 'template_rinr77q', subscribeParams)
+								.then(function(response) {
+									subscribeForm.reset();
+									subscriptionSuccess.style.display = 'block';
+									
+									// Hide the success message after 5 seconds
+									setTimeout(function() {
+										subscriptionSuccess.style.display = 'none';
+									}, 5000);
+								}, function(error) {
+									alert('Failed to subscribe. Error: ' + error.text);
+								});
+						});
+					}
 				});
 			</script>
 			
@@ -909,6 +990,15 @@
 										start: '2025-03-01T18:00:00'
 									}
 								]
+							},
+							{
+								googleCalendarApiKey: 'AIzaSyByaj-Ag6h20tT_WmByoQvovoSorDmQ94I', // You'll need to replace this with your actual API key
+								googleCalendarId: '8ac3393af27eea46a81b9270b984133bd6166e640bfc51b0a2e445119443aefa@group.calendar.google.com', // Your Google Calendar ID
+								className: 'google-event',
+								color: 'rgba(139, 195, 74, 0.8)',
+								failure: function(error) {
+									console.error('Google Calendar error:', error);
+								}
 							}
 						],
 						
