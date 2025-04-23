@@ -13,7 +13,6 @@
 		<style>
 			body { background: #1e2937 !important; }
 			#sidebar { background: #1e2937 !important; }
-			#wrapper { background: #1e2937 !important; } /* Added to fix right-side background */
 			.wrapper.style1 { background-color: #4c6b9a !important; }
 			.wrapper.style2 { background-color: #2b4465 !important; }
 			.wrapper.style3 { background-color: #4c6b9a !important; }
@@ -269,23 +268,122 @@
 				100% { transform: rotate(360deg); }
 			}
 
-			/* Fix for section layouts */
+			/* FIX: Main layout fixes */
+			#wrapper {
+				width: 100% !important;
+				max-width: 100% !important;
+				overflow-x: hidden !important;
+				background: #1e2937 !important;
+				margin: 0 !important;
+				padding-left: 19em !important; /* Match sidebar width */
+			}
+
+			/* FIX: Sidebar adjustments */
+			#sidebar {
+				width: 19em !important; /* Fixed width */
+				position: fixed !important;
+				height: 100% !important;
+				overflow-y: auto !important;
+				background: #1e2937 !important;
+			}
+
+			/* FIX: Content width adjustments */
+			.inner {
+				width: calc(100% - 4em) !important;
+				max-width: 85em !important;
+				margin: 0 auto !important;
+				padding: 0 !important;
+			}
+
+			/* FIX: Section layout */
 			section.wrapper {
-				width: 100%;
-				clear: both;
-				margin: 0;
-				padding: 0;
+				width: 100% !important;
+				max-width: 100% !important;
+				overflow: hidden !important;
+				margin: 0 !important;
+				padding: 3em 0 !important;
+				clear: both !important;
 			}
-			
-			/* Fix for content containers */
-			.spotlights > section {
-				width: 100%;
-				margin: 0;
+
+			/* FIX: Grid layout adjustments */
+			.row {
+				width: 100% !important;
+				margin-left: 0 !important;
+				margin-right: 0 !important;
 			}
-			
-			/* Ensure proper content width */
-			.content {
-				width: 100%;
+
+			/* FIX: Features grid layout */
+			.grid-container {
+				display: grid !important;
+				grid-template-columns: repeat(2, 1fr) !important;
+				gap: 2em !important;
+				width: 100% !important;
+				margin-top: 2em !important;
+			}
+
+			/* FIX: Feature box sizing */
+			.feature-box {
+				width: 100% !important;
+				box-sizing: border-box !important;
+				margin: 0 !important;
+			}
+
+			/* FIX: Image containers */
+			.image {
+				max-width: 100% !important;
+			}
+
+			/* FIX: Ensure all images are responsive */
+			img {
+				max-width: 100% !important;
+				height: auto !important;
+			}
+
+			/* FIX: Calendar container dimensions */
+			#calendar-container {
+				width: 100% !important;
+				max-width: 900px !important;
+				height: 600px !important;
+				margin: 2em auto !important;
+				overflow: hidden !important;
+			}
+
+			/* FIX: Mobile responsiveness */
+			@media screen and (max-width: 1280px) {
+				#wrapper {
+					padding-left: 0 !important;
+				}
+				
+				#sidebar {
+					width: 100% !important;
+					position: relative !important;
+					height: auto !important;
+				}
+				
+				.grid-container {
+					grid-template-columns: 1fr !important;
+				}
+			}
+
+			/* FIX: Alignment in grid layouts */
+			.col-6, .col-4, .col-12 {
+				box-sizing: border-box !important;
+				padding: 0 1em !important;
+			}
+
+			/* FIX: Button alignment */
+			.actions {
+				display: flex !important;
+				flex-wrap: wrap !important;
+				gap: 1em !important;
+				justify-content: flex-start !important;
+			}
+
+			/* FIX: Clear floats */
+			.clearfix:after {
+				content: "" !important;
+				display: table !important;
+				clear: both !important;
 			}
 		</style>
 	</head>
@@ -349,7 +447,7 @@
 						<div class="inner">
 							<h2>Skills & Training</h2>
 							<p>We focus on developing practical cybersecurity skills through hands-on training and real-world applications.</p>
-							<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2em; margin-top: 2em;">
+							<div class="grid-container">
 								<div class="feature-box">
 									<div class="feature-header">
 										<span class="icon solid major fa-lock"></span>
@@ -401,7 +499,7 @@
 						<div class="inner">
 							<h2>Our Activities</h2>
 							<p>We offer a diverse range of activities and opportunities for our members to engage with cybersecurity in practical and meaningful ways.</p>
-							<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2em; margin-top: 2em;">
+							<div class="grid-container">
 								<div class="feature-box">
 									<div class="feature-header">
 										<span class="icon solid major fa-users"></span>
