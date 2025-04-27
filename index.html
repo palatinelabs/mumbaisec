@@ -10,185 +10,175 @@
 		<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css' rel='stylesheet' />
 		<!-- EmailJS Library -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 		<style>
-			body { background: #1e2937 !important; }
-			#sidebar { background: #1e2937 !important; }
-			.wrapper.style1 { background-color: #4c6b9a !important; }
-			.wrapper.style2 { background-color: #2b4465 !important; }
-			.wrapper.style3 { background-color: #4c6b9a !important; }
-			.wrapper.style1-alt { background-color: #1e2937 !important; }
-			.inner { max-width: 85em !important; }
-			#sidebar nav a:hover { color: #ffffff !important; }
-			#sidebar nav a.active { color: #ffffff !important; }
-			.features { gap: 2em !important; }
-			.feature-box {
-				background: rgba(255, 255, 255, 0.05);
-				padding: 2em;
-				border-radius: 0.5em;
-				margin: 0;
-			}
-			.feature-header {
-				display: flex;
-				align-items: center;
-				margin-bottom: 1em;
-			}
-			.feature-header .icon {
-				margin-right: 1em;
-				color: white;
-				background: none;
-				width: auto;
-				height: auto;
-				line-height: 1;
-			}
-			.feature-header h3 {
-				margin: 0;
+			/* Enhanced Cybersecurity Theme */
+			:root {
+				--cyber-dark: #0a0e17;
+				--cyber-medium: #1a2333;
+				--cyber-light: #2a3a54;
+				--cyber-accent: #4ae3b5;
+				--cyber-accent-2: #ff3e55;
+				--cyber-text: #e1ebff;
+				--cyber-grid: rgba(74, 227, 181, 0.1);
 			}
 			
-			/* Calendar Styles - Exact Match to Screenshots */
-			#calendar-container {
+			body { 
+				background: var(--cyber-dark) !important;
+				color: var(--cyber-text) !important;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+			}
+			
+			/* Digital background effect */
+			body::before {
+				content: "";
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-image: 
+					linear-gradient(rgba(10, 14, 23, 0.97), rgba(10, 14, 23, 0.97)),
+					repeating-linear-gradient(0deg, transparent, transparent 40px, var(--cyber-grid) 40px, var(--cyber-grid) 41px),
+					repeating-linear-gradient(90deg, transparent, transparent 40px, var(--cyber-grid) 40px, var(--cyber-grid) 41px);
+				z-index: -1;
+			}
+			
+			#sidebar { 
+				background: var(--cyber-medium) !important;
+				border-right: 1px solid var(--cyber-accent) !important;
+			}
+			
+			#sidebar nav a {
+				color: var(--cyber-text) !important;
+				transition: color 0.3s, border-left 0.3s !important;
+				border-left: 0px solid var(--cyber-accent) !important;
+				padding-left: 1em !important;
+			}
+			
+			#sidebar nav a:hover { 
+				color: var(--cyber-accent) !important; 
+				border-left: 4px solid var(--cyber-accent) !important;
+			}
+			
+			#sidebar nav a.active { 
+				color: var(--cyber-accent) !important;
+				border-left: 4px solid var(--cyber-accent) !important;
+			}
+			
+			.wrapper.style1 { background-color: var(--cyber-medium) !important; }
+			.wrapper.style2 { background-color: var(--cyber-dark) !important; }
+			.wrapper.style3 { background-color: var(--cyber-medium) !important; }
+			.wrapper.style1-alt { background-color: var(--cyber-dark) !important; }
+			
+			h1, h2, h3, h4, h5, h6 {
+				color: var(--cyber-accent) !important;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+				font-weight: 700 !important;
+				text-transform: uppercase !important;
+				letter-spacing: 0.1em !important;
+			}
+			
+			.button {
+				background-color: var(--cyber-medium) !important;
+				color: var(--cyber-text) !important;
+				border: 1px solid var(--cyber-accent) !important;
+				border-radius: 0 !important;
+				position: relative !important;
+				overflow: hidden !important;
+				transition: all 0.3s !important;
+				text-transform: uppercase !important;
+				letter-spacing: 0.1em !important;
+				font-weight: 600 !important;
+			}
+			
+			.button::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(74, 227, 181, 0.2), transparent);
+				transition: all 0.6s;
+			}
+			
+			.button:hover {
+				background-color: rgba(74, 227, 181, 0.1) !important;
+				box-shadow: 0 0 15px rgba(74, 227, 181, 0.5) !important;
+			}
+			
+			.button:hover::before {
+				left: 100%;
+			}
+			
+			/* Feature Boxes */
+			.feature-box {
+				background: rgba(26, 35, 51, 0.7) !important;
+				border: 1px solid var(--cyber-accent) !important;
+				border-radius: 0 !important;
+				transition: all 0.3s !important;
+				position: relative !important;
+				overflow: hidden !important;
+			}
+			
+			.feature-box::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 3px;
+				background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2));
+			}
+			
+			.feature-box:hover {
+				transform: translateY(-5px) !important;
+				box-shadow: 0 5px 20px rgba(74, 227, 181, 0.2) !important;
+			}
+			
+			.feature-header .icon {
+				color: var(--cyber-accent) !important;
+				font-size: 1.5em !important;
+			}
+			
+			.inner { max-width: 85em !important; }
+			
+			.grid-container {
+				display: grid !important;
+				grid-template-columns: repeat(2, 1fr) !important;
+				gap: 2em !important;
+				width: 100% !important;
+				margin-top: 2em !important;
+			}
+			
+			/* Calendar styling */
+			.calendar-container {
 				max-width: 900px;
 				margin: 2em auto;
-				background: #2d3e5e !important;
+				border: 1px solid var(--cyber-accent) !important;
 				padding: 0 !important;
-				border-radius: 0 !important;
-				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+				position: relative !important;
+				overflow: hidden !important;
 			}
 			
-			/* Button Styles */
-			.fc .fc-button {
-				background-color: #344b7c !important;
-				border: none !important;
-				box-shadow: none !important;
-				color: white !important;
-				text-transform: capitalize !important;
-				opacity: 1 !important;
+			.calendar-container::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 3px;
+				background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2));
+				z-index: 1;
 			}
 			
-			.fc .fc-button-primary:not(:disabled).fc-button-active {
-				background-color: #4668a0 !important;
-			}
-			
-			.fc .fc-button-primary:hover {
-				background-color: #4668a0 !important;
-			}
-			
-			/* Header Toolbar */
-			.fc .fc-toolbar {
-				padding: 1.5em 1.5em 0.5em !important;
-				margin-bottom: 0 !important;
-			}
-			
-			.fc .fc-toolbar-title {
-				color: white !important;
-				font-size: 24px !important;
-				font-weight: 500 !important;
-			}
-			
-			/* Calendar Header */
-			.fc .fc-col-header-cell {
-				background-color: #344b7c !important;
-				padding: 8px 0 !important;
-				border: 1px solid #273962 !important;
-				font-weight: 400 !important;
-			}
-			
-			.fc .fc-col-header-cell-cushion {
-				padding: 8px !important;
-				color: white !important;
-				text-decoration: none !important;
-				font-weight: 500 !important;
-			}
-			
-			/* Day Cells */
-			.fc .fc-daygrid-day {
-				background-color: #2d3e5e !important;
-				min-height: 100px !important;
-				border: 1px solid #273962 !important;
-			}
-			
-			.fc .fc-daygrid-day.fc-day-today {
-				background-color: #36486b !important;
-			}
-			
-			.fc .fc-daygrid-day.fc-day-other {
-				background-color: #273962 !important;
-				opacity: 1 !important;
-			}
-			
-			.fc .fc-daygrid-day-top {
-				padding: 5px !important;
-				text-align: right !important;
-				justify-content: flex-end !important;
-			}
-			
-			.fc .fc-daygrid-day-number {
-				color: white !important;
-				text-decoration: none !important;
-				font-size: 14px !important;
-				font-weight: 400 !important;
-				padding: 0 8px 0 0 !important;
-			}
-			
-			/* Event Styles */
-			.fc .fc-daygrid-day-events {
-				margin-top: 2px !important;
-				padding: 0 4px !important;
-			}
-			
-			.fc .fc-daygrid-event {
-				margin-bottom: 3px !important;
-				background-color: rgba(88, 130, 193, 0.8) !important;
-				border: none !important;
-				border-radius: 2px !important;
-				padding: 2px 4px !important;
-				font-size: 12px !important;
-				cursor: pointer !important;
-				line-height: 1.3 !important;
-				white-space: normal !important;
-			}
-			
-			.fc .fc-daygrid-event .fc-event-main {
-				color: white !important;
-				padding: 0 !important;
-			}
-			
-			.fc .fc-daygrid-event .fc-event-time {
-				display: inline-block !important;
-				margin-right: 3px !important;
-				font-weight: 400 !important;
-			}
-			
-			.fc .fc-daygrid-event .fc-event-title {
-				display: inline-block !important;
-				font-weight: 400 !important;
-				overflow: visible !important;
-			}
-			
-			/* Fix for week/month buttons spacing */
-			.fc .fc-button-group {
-				gap: 1px !important;
-			}
-			
-			/* Remove more link (+more) */
-			.fc .fc-daygrid-more-link {
-				display: none !important;
-			}
-			
-			/* Custom class for specific event colors */
-			.event-box {
-				background-color: rgba(88, 130, 193, 0.8) !important;
-				color: white !important;
-				padding: 2px 4px !important;
-				margin: 0 5px 3px !important;
-				border-radius: 2px !important;
-				font-size: 12px !important;
-				line-height: 1.3 !important;
-				cursor: pointer !important;
-			}
-			
-			/* Google Calendar events style - helps distinguish them */
-			.google-event {
-				background-color: rgba(139, 195, 74, 0.8) !important;
+			.calendar-iframe {
+				width: 100%;
+				height: 700px;
+				border: none;
+				background: var(--cyber-medium);
 			}
 			
 			/* Modal styles for email confirmation */
@@ -201,40 +191,51 @@
 				width: 100%;
 				height: 100%;
 				overflow: auto;
-				background-color: rgba(0, 0, 0, 0.7);
+				background-color: rgba(10, 14, 23, 0.9);
 				transition: opacity 0.3s ease;
 			}
 			
 			.modal-content {
-				background-color: #2b4465;
+				background-color: var(--cyber-medium);
 				margin: 15% auto;
 				padding: 20px;
-				border: 1px solid #4c6b9a;
-				border-radius: 5px;
+				border: 1px solid var(--cyber-accent);
 				width: 70%;
 				max-width: 500px;
-				color: white;
+				color: var(--cyber-text);
 				text-align: center;
 				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+				position: relative;
+			}
+			
+			.modal-content::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 3px;
+				background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2));
 			}
 			
 			.close {
-				color: #aaa;
+				color: var(--cyber-accent);
 				float: right;
 				font-size: 28px;
 				font-weight: bold;
 				cursor: pointer;
+				transition: all 0.3s;
 			}
 			
 			.close:hover,
 			.close:focus {
-				color: white;
+				color: var(--cyber-accent-2);
 				text-decoration: none;
 			}
 			
 			.modal h2 {
 				margin-top: 0;
-				color: white;
+				color: var(--cyber-accent);
 			}
 			
 			.modal p {
@@ -242,27 +243,44 @@
 			}
 			
 			.modal-button {
-				background-color: #4c6b9a;
-				color: white;
-				border: none;
+				background-color: var(--cyber-medium);
+				color: var(--cyber-text);
+				border: 1px solid var(--cyber-accent);
 				padding: 10px 20px;
-				border-radius: 4px;
 				cursor: pointer;
 				font-weight: bold;
-				transition: background-color 0.3s ease;
+				transition: all 0.3s;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			.modal-button::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(74, 227, 181, 0.2), transparent);
+				transition: all 0.6s;
 			}
 			
 			.modal-button:hover {
-				background-color: #5d7cad;
+				background-color: rgba(74, 227, 181, 0.1);
+				box-shadow: 0 0 15px rgba(74, 227, 181, 0.5);
+			}
+			
+			.modal-button:hover::before {
+				left: 100%;
 			}
 			
 			/* Loading indicator */
 			.spinner {
 				display: none;
 				margin: 0 auto;
-				border: 4px solid rgba(255, 255, 255, 0.3);
+				border: 4px solid rgba(74, 227, 181, 0.1);
 				border-radius: 50%;
-				border-top: 4px solid #ffffff;
+				border-top: 4px solid var(--cyber-accent);
 				width: 20px;
 				height: 20px;
 				animation: spin 1s linear infinite;
@@ -273,26 +291,25 @@
 				100% { transform: rotate(360deg); }
 			}
 
-			/* FIX: Main layout fixes */
+			/* Layout fixes */
 			#wrapper {
 				width: 100% !important;
 				max-width: 100% !important;
 				overflow-x: hidden !important;
-				background: #1e2937 !important;
+				background: var(--cyber-dark) !important;
 				margin: 0 !important;
 				padding-left: 19em !important; /* Match sidebar width */
 			}
 
-			/* FIX: Sidebar adjustments */
 			#sidebar {
 				width: 19em !important; /* Fixed width */
 				position: fixed !important;
 				height: 100% !important;
 				overflow-y: auto !important;
-				background: #1e2937 !important;
+				background: var(--cyber-medium) !important;
+				box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3) !important;
 			}
 
-			/* FIX: Content width adjustments */
 			.inner {
 				width: calc(100% - 4em) !important;
 				max-width: 85em !important;
@@ -300,7 +317,6 @@
 				padding: 0 !important;
 			}
 
-			/* FIX: Section layout */
 			section.wrapper {
 				width: 100% !important;
 				max-width: 100% !important;
@@ -310,50 +326,13 @@
 				clear: both !important;
 			}
 
-			/* FIX: Grid layout adjustments */
 			.row {
 				width: 100% !important;
 				margin-left: 0 !important;
 				margin-right: 0 !important;
 			}
 
-			/* FIX: Features grid layout */
-			.grid-container {
-				display: grid !important;
-				grid-template-columns: repeat(2, 1fr) !important;
-				gap: 2em !important;
-				width: 100% !important;
-				margin-top: 2em !important;
-			}
-
-			/* FIX: Feature box sizing */
-			.feature-box {
-				width: 100% !important;
-				box-sizing: border-box !important;
-				margin: 0 !important;
-			}
-
-			/* FIX: Image containers */
-			.image {
-				max-width: 100% !important;
-			}
-
-			/* FIX: Ensure all images are responsive */
-			img {
-				max-width: 100% !important;
-				height: auto !important;
-			}
-
-			/* FIX: Calendar container dimensions */
-			#calendar-container {
-				width: 100% !important;
-				max-width: 900px !important;
-				height: 700px !important; /* Increased height to show full calendar */
-				margin: 2em auto !important;
-				overflow: visible !important; /* Changed from hidden to visible */
-			}
-
-			/* FIX: Mobile responsiveness */
+			/* Mobile responsiveness */
 			@media screen and (max-width: 1280px) {
 				#wrapper {
 					padding-left: 0 !important;
@@ -370,189 +349,90 @@
 				}
 			}
 
-			/* FIX: Alignment in grid layouts */
-			.col-6, .col-4, .col-12 {
-				box-sizing: border-box !important;
-				padding: 0 1em !important;
-			}
-
-			/* FIX: Button alignment */
-			.actions {
-				display: flex !important;
-				flex-wrap: wrap !important;
-				gap: 1em !important;
-				justify-content: flex-start !important;
-			}
-
-			/* FIX: Clear floats */
-			.clearfix:after {
-				content: "" !important;
-				display: table !important;
-				clear: both !important;
-			}
-
-			/* Simplified footer styles */
-			#footer {
-				padding: 3em 0 2em 0 !important;
-				background-color: #1a2530 !important;
-				width: 100% !important;
-				overflow: hidden !important;
-			}
-
-			.footer-subscribe {
-				max-width: 600px !important;
-				margin: 0 auto 2em auto !important;
-				text-align: center !important;
-			}
-
-			.footer-subscribe h3 {
-				font-size: 1.2em !important;
-				margin-bottom: 0.5em !important;
-				color: white !important;
-			}
-
-			.footer-subscribe p {
-				color: rgba(255, 255, 255, 0.7) !important;
-				margin-bottom: 1em !important;
-			}
-
-			.subscribe-form {
-				display: flex !important;
-				margin: 1em auto !important;
-				max-width: 500px !important;
-			}
-
-			.subscribe-form input[type="email"] {
-				flex: 1 !important;
-				padding: 0.5em 1em !important;
-				border: none !important;
-				border-radius: 3px 0 0 3px !important;
-				background-color: rgba(255, 255, 255, 0.1) !important;
-				color: white !important;
-			}
-
-			.subscribe-form button {
-				padding: 0.5em 1em !important;
-				border: none !important;
-				border-radius: 0 3px 3px 0 !important;
-				background-color: #4c6b9a !important;
-				color: white !important;
-				cursor: pointer !important;
-				transition: background-color 0.3s ease !important;
-			}
-
-			.subscribe-form button:hover {
-				background-color: #5d7cad !important;
-			}
-
-			#subscription-success {
-				display: none;
-				margin: 1em auto;
-				padding: 0.5em;
-				background-color: rgba(46, 204, 113, 0.2);
-				color: #2ecc71;
-				border-radius: 3px;
-				text-align: center;
-				max-width: 500px;
-			}
-
-			.footer-bottom {
-				border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-				padding-top: 1em !important;
-				text-align: center !important;
-				color: rgba(255, 255, 255, 0.5) !important;
-			}
-
-			/* Mobile responsiveness for footer */
-			@media screen and (max-width: 736px) {
-				.subscribe-form {
-					flex-direction: column !important;
-					gap: 0.5em !important;
-				}
-				
-				.subscribe-form input[type="email"],
-				.subscribe-form button {
-					width: 100% !important;
-					border-radius: 3px !important;
-				}
+			/* Form styling */
+			input[type="text"], 
+			input[type="email"],
+			textarea {
+				background-color: rgba(26, 35, 51, 0.7) !important;
+				border: 1px solid var(--cyber-accent) !important;
+				color: var(--cyber-text) !important;
+				border-radius: 0 !important;
+				transition: all 0.3s !important;
 			}
 			
-			/* Legend for calendar events */
-			.calendar-legend {
-				display: flex;
-				justify-content: center;
-				margin-top: 1em;
-				gap: 2em;
+			input[type="text"]:focus, 
+			input[type="email"]:focus,
+			textarea:focus {
+				border-color: var(--cyber-accent-2) !important;
+				box-shadow: 0 0 10px rgba(74, 227, 181, 0.3) !important;
 			}
 			
-			.legend-item {
-				display: flex;
-				align-items: center;
-				font-size: 0.9em;
+			/* Section transitions */
+			section {
+				position: relative;
+				overflow: hidden;
 			}
 			
-			.legend-color {
-				width: 16px;
-				height: 16px;
-				border-radius: 3px;
-				margin-right: 0.5em;
-			}
-			
-			.legend-default {
-				background-color: rgba(88, 130, 193, 0.8);
-			}
-			
-			.legend-google {
-				background-color: rgba(139, 195, 74, 0.8);
-			}
-			
-			/* Debug panel styles */
-			.debug-panel {
-				background: rgba(0, 0, 0, 0.5);
-				color: white;
-				padding: 10px;
-				margin: 10px 0;
-				border-radius: 4px;
-				font-family: monospace;
-				font-size: 12px;
-				max-height: 200px;
-				overflow-y: auto;
-				display: none;
-			}
-			
-			/* Controls for calendar options */
-			.calendar-controls {
-				margin: 15px auto;
-				text-align: center;
-				max-width: 900px;
-			}
-			
-			.calendar-controls button {
-				background-color: #4c6b9a;
-				color: white;
-				border: none;
-				padding: 8px 15px;
-				margin: 0 5px;
-				border-radius: 4px;
-				cursor: pointer;
-			}
-			
-			.calendar-controls button:hover {
-				background-color: #5d7cad;
-			}
-			
-			/* Iframe backup option */
-			.calendar-iframe-container {
-				max-width: 900px;
-				margin: 2em auto;
-				display: none;
-			}
-			
-			.calendar-iframe {
+			section::after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 0;
 				width: 100%;
-				height: 600px;
-				border: none;
-				background: #2d3e5e;
+				height: 3px;
+				background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2));
+				opacity: 0.5;
+			}
+			
+			/* Cyber glitch animation for heading */
+			@keyframes glitch {
+				0% {
+					text-shadow: 0.05em 0 0 rgba(255, 62, 85, 0.75),
+						-0.05em -0.025em 0 rgba(74, 227, 181, 0.75),
+						-0.025em 0.05em 0 rgba(255, 255, 255, 0.75);
+				}
+				15% {
+					text-shadow: -0.05em -0.025em 0 rgba(255, 62, 85, 0.75),
+						0.025em 0.025em 0 rgba(74, 227, 181, 0.75),
+						-0.05em -0.05em 0 rgba(255, 255, 255, 0.75);
+				}
+				49% {
+					text-shadow: -0.05em -0.025em 0 rgba(255, 62, 85, 0.75),
+						0.025em 0.025em 0 rgba(74, 227, 181, 0.75),
+						-0.05em -0.05em 0 rgba(255, 255, 255, 0.75);
+				}
+				50% {
+					text-shadow: 0.025em 0.05em 0 rgba(255, 62, 85, 0.75),
+						0.05em 0 0 rgba(74, 227, 181, 0.75),
+						0 -0.05em 0 rgba(255, 255, 255, 0.75);
+				}
+				99% {
+					text-shadow: 0.025em 0.05em 0 rgba(255, 62, 85, 0.75),
+						0.05em 0 0 rgba(74, 227, 181, 0.75),
+						0 -0.05em 0 rgba(255, 255, 255, 0.75);
+				}
+				100% {
+					text-shadow: -0.025em 0 0 rgba(255, 62, 85, 0.75),
+						-0.025em -0.025em 0 rgba(74, 227, 181, 0.75),
+						-0.025em -0.05em 0 rgba(255, 255, 255, 0.75);
+				}
+			}
+			
+			.glitch-text {
+				animation: glitch 1.5s infinite alternate-reverse;
+			}
+			
+			/* Social icons with glow effect */
+			.icons a {
+				color: var(--cyber-text) !important;
+				border: 1px solid var(--cyber-accent) !important;
+				border-radius: 50% !important;
+				transition: all 0.3s !important;
+			}
+			
+			.icons a:hover {
+				color: var(--cyber-accent) !important;
+				box-shadow: 0 0 15px rgba(74, 227, 181, 0.7) !important;
 			}
 		</style>
 	</head>
@@ -581,15 +461,15 @@
 				<!-- Intro -->
 					<section id="intro" class="wrapper style1 fullscreen fade-up">
 						<div class="inner">
-							<h1>Welcome to MumbaiSec</h1>
+							<h1 class="glitch-text">Welcome to MumbaiSec</h1>
 							<p class="major">Mumbai's Premier Cybersecurity Community</p>
 							<p>Are you passionate about cybersecurity? Looking to enhance your skills, network with like-minded individuals, or just starting your journey in the world of information security?</p>
 							<p>We are a dynamic community of cybersecurity enthusiasts, professionals, and learners who come together to:</p>
 							<ul style="margin-bottom: 1.5em;">
-								<li>Master practical security skills through hands-on workshops</li>
-								<li>Participate in exciting CTF competitions and security challenges</li>
-								<li>Learn from industry experts and guest speakers</li>
-								<li>Network with fellow security enthusiasts</li>
+								<li><i class="fas fa-shield-alt" style="color: var(--cyber-accent); margin-right: 0.5em;"></i> Master practical security skills through hands-on workshops</li>
+								<li><i class="fas fa-flag" style="color: var(--cyber-accent); margin-right: 0.5em;"></i> Participate in exciting CTF competitions and security challenges</li>
+								<li><i class="fas fa-chalkboard-teacher" style="color: var(--cyber-accent); margin-right: 0.5em;"></i> Learn from industry experts and guest speakers</li>
+								<li><i class="fas fa-users" style="color: var(--cyber-accent); margin-right: 0.5em;"></i> Network with fellow security enthusiasts</li>
 							</ul>
 							<ul class="actions">
 								<li><a href="#one" class="button scrolly">Discover More</a></li>
@@ -619,42 +499,42 @@
 							<div class="grid-container">
 								<div class="feature-box">
 									<div class="feature-header">
-										<span class="icon solid major fa-lock"></span>
+										<span class="icon fas fa-lock"></span>
 										<h3>Cryptography</h3>
 									</div>
 									<p>The practice and study of techniques for secure communication in the presence of adversarial behavior.</p>
 								</div>
 								<div class="feature-box">
 									<div class="feature-header">
-										<span class="icon solid major fa-cog"></span>
+										<span class="icon fas fa-microchip"></span>
 										<h3>Reverse Engineering</h3>
 									</div>
 									<p>Understanding the functionality of software or hardware to identify deeper issues and vulnerabilities.</p>
 								</div>
 								<div class="feature-box">
 									<div class="feature-header">
-										<span class="icon solid major fa-bug"></span>
+										<span class="icon fas fa-bug"></span>
 										<h3>Binary Exploitation</h3>
 									</div>
 									<p>Taking advantage of bugs or flaws in software to leak information or take control.</p>
 								</div>
 								<div class="feature-box">
 									<div class="feature-header">
-										<span class="icon solid major fa-globe"></span>
+										<span class="icon fas fa-globe"></span>
 										<h3>Web Security</h3>
 									</div>
 									<p>Attacking protocols, software, and infrastructure related to the world wide web.</p>
 								</div>
 								<div class="feature-box">
 									<div class="feature-header">
-										<span class="icon solid major fa-shield-alt"></span>
+										<span class="icon fas fa-search"></span>
 										<h3>Forensics</h3>
 									</div>
 									<p>Application of investigation and analysis techniques to gather and preserve evidence.</p>
 								</div>
 								<div class="feature-box">
 									<div class="feature-header">
-										<span class="icon solid major fa-network-wired"></span>
+										<span class="icon fas fa-network-wired"></span>
 										<h3>Network Security</h3>
 									</div>
 									<p>Understanding and implementing secure network architectures and protocols.</p>
@@ -671,42 +551,42 @@
 							<div class="grid-container">
 								<div class="feature-box">
 									<div class="feature-header">
-										<span class="icon solid major fa-users"></span>
+										<span class="icon fas fa-users"></span>
 										<h3>Regular Meetings</h3>
 									</div>
 									<p>Weekly meetings to discuss current cybersecurity concepts and trends, featuring hands-on learning experiences.</p>
 								</div>
 								<div class="feature-box">
 									<div class="feature-header">
-										<span class="icon solid major fa-flag"></span>
+										<span class="icon fas fa-flag"></span>
 										<h3>CTF Competitions</h3>
 									</div>
 									<p>Participate in Capture The Flag competitions to test and improve your cybersecurity skills in a competitive environment.</p>
 								</div>
 								<div class="feature-box">
 									<div class="feature-header">
-										<span class="icon solid major fa-chalkboard-teacher"></span>
+										<span class="icon fas fa-chalkboard-teacher"></span>
 										<h3>Guest Speakers</h3>
 									</div>
 									<p>Learn from prominent industry experts and professionals through regular guest speaker sessions.</p>
 								</div>
 								<div class="feature-box">
 									<div class="feature-header">
-										<span class="icon solid major fa-laptop-code"></span>
+										<span class="icon fas fa-laptop-code"></span>
 										<h3>Skill Development</h3>
 									</div>
 									<p>Hands-on training sessions to develop practical cybersecurity skills and knowledge.</p>
 								</div>
 								<div class="feature-box">
 									<div class="feature-header">
-										<span class="icon solid major fa-users"></span>
+										<span class="icon fas fa-handshake"></span>
 										<h3>Networking</h3>
 									</div>
 									<p>Connect with like-minded individuals, professionals, and enthusiasts in the cybersecurity community.</p>
 								</div>
 								<div class="feature-box">
 									<div class="feature-header">
-										<span class="icon solid major fa-smile"></span>
+										<span class="icon fas fa-smile"></span>
 										<h3>Fun & Food</h3>
 									</div>
 									<p>Enjoy gaming sessions, good food, and social activities while building lasting connections in the security community.</p>
@@ -716,51 +596,25 @@
 					</section>
 
 				<!-- Calendar -->
-					<section id="calendar" class="wrapperstyle2 fade-up">
+					<section id="calendar" class="wrapper style3 fade-up">
 						<div class="inner">
 							<h2>Event Calendar</h2>
 							<p>Check out our upcoming cybersecurity events, workshops, and meetups!</p>
 							
-							<!-- Calendar controls -->
-							<div class="calendar-controls">
-								<button id="toggle-fullcalendar">FullCalendar View</button>
-								<button id="toggle-iframe">Embedded Calendar View</button>
-								<button id="debug-button">Debug Calendar</button>
-							</div>
-							
-							<!-- Debug panel for errors -->
-							<div id="debug-panel" class="debug-panel"></div>
-							
-							<!-- FullCalendar container -->
-							<div id="calendar-container">
-								<!-- Calendar will be rendered here -->
-							</div>
-							
-							<!-- iFrame fallback option -->
-							<div id="calendar-iframe-container" class="calendar-iframe-container">
-								<iframe id="calendar-iframe" class="calendar-iframe" src="https://calendar.google.com/calendar/embed?src=8ac3393af27eea46a81b9270b984133bd6166e640bfc51b0a2e445119443aefa%40group.calendar.google.com&ctz=Asia%2FKolkata" frameborder="0" scrolling="no"></iframe>
-							</div>
-							
-							<!-- Calendar Legend -->
-							<div class="calendar-legend">
-								<div class="legend-item">
-									<div class="legend-color legend-default"></div>
-									<span>Website Events</span>
-								</div>
-								<div class="legend-item">
-									<div class="legend-color legend-google"></div>
-									<span>Google Calendar Events</span>
-								</div>
+							<!-- Embedded Google Calendar -->
+							<div class="calendar-container">
+								<iframe class="calendar-iframe" src="https://calendar.google.com/calendar/embed?src=8ac3393af27eea46a81b9270b984133bd6166e640bfc51b0a2e445119443aefa%40group.calendar.google.com&ctz=Asia%2FKolkata&bgcolor=%231a2333&color=%234ae3b5&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&showTz=1" frameborder="0" scrolling="no"></iframe>
 							</div>
 						</div>
 					</section>
 
 				<!-- Sponsors -->
-					<section id="sponsors" class="wrapper style3 fade-up">
+					<section id="sponsors" class="wrapper style2 fade-up">
 						<div class="inner">
 							<h2>Our Sponsors</h2>
 							<p>We're proud to be supported by organizations that share our commitment to cybersecurity education and skill development.</p>
-							<div style="background: rgba(255, 255, 255, 0.05); padding: 3em; border-radius: 0.5em; margin: 2em auto; max-width: 800px; text-align: center;">
+							<div style="background: rgba(26, 35, 51, 0.7); border: 1px solid var(--cyber-accent); padding: 3em; margin: 2em auto; max-width: 800px; text-align: center; position: relative;">
+								<div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2));"></div>
 								<h3>Become a Sponsor</h3>
 								<p style="margin: 1em 0 2em 0;">Sponsorship is a great way to support our mission and reach out to our members. Through sponsorship, your organization can help organize outreach events, give workshops, and more.</p>
 								<a href="#three" class="button">Contact Us About Sponsorship</a>
@@ -769,7 +623,7 @@
 					</section>
 
 				<!-- Contact -->
-					<section id="three" class="wrapper style1 fade-up">
+					<section id="three" class="wrapper style3 fade-up">
 						<div class="inner">
 							<h2>Get in Touch</h2>
 							<p>Interested in joining MumbaiSec or have questions? Reach out to us!</p>
@@ -814,9 +668,9 @@
 										<li>
 											<h3>Social</h3>
 											<ul class="icons">
-												<li><a href="#" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
-												<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-												<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+												<li><a href="#" class="icon brands fab fa-discord"><span class="label">Discord</span></a></li>
+												<li><a href="#" class="icon brands fab fa-twitter"><span class="label">Twitter</span></a></li>
+												<li><a href="#" class="icon brands fab fa-github"><span class="label">GitHub</span></a></li>
 											</ul>
 										</li>
 									</ul>
@@ -826,27 +680,6 @@
 					</section>
 
 			</div>
-
-		<!-- Footer with simplified layout - subscription -->
-		<footer id="footer" class="wrapper style1-alt">
-			<div class="inner">
-				<div class="footer-subscribe">
-					<h3
-					<h3>Subscribe to Our Newsletter</h3>
-					<p>Stay updated with our latest events, workshops, and cybersecurity news.</p>
-					<form id="subscribe-form" class="subscribe-form">
-						<input type="email" id="subscribe-email" placeholder="Your email address" required>
-						<button type="submit">Subscribe</button>
-					</form>
-					<div id="subscription-success">
-						Thanks for subscribing! You'll receive our next newsletter.
-					</div>
-				</div>
-				<div class="footer-bottom">
-					<p>© 2025 MumbaiSec. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a></p>
-				</div>
-			</div>
-		</footer>
 			
 		<!-- Modal for email confirmation -->
 		<div id="confirmation-modal" class="modal">
@@ -942,361 +775,142 @@
 						// Log to console for debugging
 						console.log("Preparing to send email with EmailJS...");
 						
-						// Prepare email parameters
-						var templateParams = {
+						// EmailJS direct send method - more reliable than the template approach
+						emailjs.send("service_oyi7x7h", "template_vvlwt2q", {
 							from_name: name,
 							from_email: email,
 							message: message,
 							to_name: 'MumbaiSec Admin',
 							reply_to: email,
-							to_email: 'yajwinjain@gmail.com' // Send emails to this address
-						};
-						
-						// Extended logging for debugging
-						console.log("Email parameters:", JSON.stringify(templateParams));
-						
-						// Send email with better error handling
-						// Use your actual service ID and template ID
-						emailjs.send('service_oyi7x7h', 'template_vvlwt2q', templateParams)
-							.then(function(response) {
-								console.log("EmailJS SUCCESS:", response);
-								submitText.style.display = 'inline';
-								spinner.style.display = 'none';
-								form.reset();
-								if (modal) {
-									modal.style.display = "block";
+							to_email: 'yajwinjain@gmail.com'
+						})
+						.then(function(response) {
+							console.log("EmailJS SUCCESS:", response);
+							submitText.style.display = 'inline';
+							spinner.style.display = 'none';
+							form.reset();
+							if (modal) {
+								modal.style.display = "block";
+							}
+						})
+						.catch(function(error) {
+							console.error("EmailJS FAILED:", error);
+							submitText.style.display = 'inline';
+							spinner.style.display = 'none';
+							
+							// Try alternative approach using raw XMLHttpRequest
+							var xhr = new XMLHttpRequest();
+							xhr.open("POST", "https://api.emailjs.com/api/v1.0/email/send", true);
+							xhr.setRequestHeader("Content-Type", "application/json");
+							
+							xhr.onload = function() {
+								if (this.status >= 200 && this.status < 300) {
+									console.log("Alternative email method SUCCESS");
+									form.reset();
+									if (modal) {
+										modal.style.display = "block";
+									}
+								} else {
+									console.error("Alternative email method FAILED:", this.responseText);
+									alert('Failed to send message. Please try again or contact us directly at yajwinjain@gmail.com');
 								}
-							}, function(error) {
-								console.error("EmailJS FAILED:", error);
-								submitText.style.display = 'inline';
-								spinner.style.display = 'none';
-								alert('Failed to send message. Error: ' + error.text + '\nPlease try again or contact us directly at yajwinjain@gmail.com');
-							});
-					});
-
-					// Newsletter subscription form
-					var subscribeForm = document.getElementById('subscribe-form');
-					var subscriptionSuccess = document.getElementById('subscription-success');
-
-					if (subscribeForm) {
-						subscribeForm.addEventListener('submit', function(event) {
-							event.preventDefault();
-							
-							var email = document.getElementById('subscribe-email').value.trim();
-							
-							if (!email) {
-								alert('Please enter your email address');
-								return;
-							}
-							
-							if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-								alert('Please enter a valid email address');
-								return;
-							}
-							
-							console.log("Preparing to send newsletter subscription...");
-							
-							// Newsletter subscription parameters
-							var subscribeParams = {
-								from_email: email,
-								to_email: 'yajwinjain@gmail.com',
-								subscription_type: 'MumbaiSec Newsletter',
-								message: 'New newsletter subscription request from ' + email
 							};
 							
-							// Use your actual service ID and template ID for newsletter subscriptions 
-							emailjs.send('service_oyi7x7h', 'template_vvlwt2q', subscribeParams)
-								.then(function(response) {
-									console.log("Newsletter subscription SUCCESS:", response);
-									subscribeForm.reset();
-									if (subscriptionSuccess) {
-										subscriptionSuccess.style.display = 'block';
-										
-										// Hide the success message after 5 seconds
-										setTimeout(function() {
-											subscriptionSuccess.style.display = 'none';
-										}, 5000);
-									}
-								}, function(error) {
-									console.error("Newsletter subscription FAILED:", error);
-									alert('Failed to subscribe. Error: ' + error.text);
-								});
+							xhr.onerror = function() {
+								console.error("Alternative email method ERROR");
+								alert('Failed to send message. Please try again or contact us directly at yajwinjain@gmail.com');
+							};
+							
+							var data = JSON.stringify({
+								service_id: "service_oyi7x7h",
+								template_id: "template_vvlwt2q",
+								user_id: "lrsrduZJQAymOwmac",
+								template_params: {
+									from_name: name,
+									from_email: email,
+									message: message,
+									to_name: 'MumbaiSec Admin',
+									reply_to: email,
+									to_email: 'yajwinjain@gmail.com'
+								}
+							});
+							
+							xhr.send(data);
 						});
-					}
+					});
+					
+					// Console log current timestamp to verify script is running
+					console.log("Contact form script initialized at: " + new Date().toLocaleString());
 				});
 			</script>
 			
-			<!-- Calendar Script with improved debugging and fallback options -->
+			<!-- Custom Animation Effects -->
 			<script type="text/javascript">
 				document.addEventListener('DOMContentLoaded', function() {
-					var calendarEl = document.getElementById('calendar-container');
-					var iframeContainer = document.getElementById('calendar-iframe-container');
-					var debugPanel = document.getElementById('debug-panel');
-					var debugButton = document.getElementById('debug-button');
-					var toggleFullCalendarBtn = document.getElementById('toggle-fullcalendar');
-					var toggleIframeBtn = document.getElementById('toggle-iframe');
-					
-					// Function to add debug messages
-					function logDebug(message, isError) {
-						if (!debugPanel) return;
+					// Function to animate elements when they come into view
+					function animateOnScroll() {
+						var elements = document.querySelectorAll('.feature-box, h2, .button, .calendar-container');
 						
-						var msgElement = document.createElement('div');
-						msgElement.textContent = new Date().toLocaleTimeString() + ': ' + message;
-						
-						if (isError) {
-							msgElement.style.color = '#ff6b6b';
-							console.error(message);
-						} else {
-							console.log(message);
-						}
-						
-						debugPanel.appendChild(msgElement);
-						// Auto-scroll to latest message
-						debugPanel.scrollTop = debugPanel.scrollHeight;
-					}
-					
-					// Toggle view buttons
-					if (toggleFullCalendarBtn) {
-						toggleFullCalendarBtn.addEventListener('click', function() {
-							if (calendarEl) calendarEl.style.display = 'block';
-							if (iframeContainer) iframeContainer.style.display = 'none';
-							logDebug('Switched to FullCalendar view');
-						});
-					}
-					
-					if (toggleIframeBtn) {
-						toggleIframeBtn.addEventListener('click', function() {
-							if (calendarEl) calendarEl.style.display = 'none';
-							if (iframeContainer) iframeContainer.style.display = 'block';
-							logDebug('Switched to iFrame embedded view');
-						});
-					}
-					
-					// Debug button
-					if (debugButton) {
-						debugButton.addEventListener('click', function() {
-							if (debugPanel) {
-								debugPanel.style.display = debugPanel.style.display === 'none' ? 'block' : 'none';
-								logDebug('Debug panel toggled');
+						elements.forEach(function(element) {
+							var position = element.getBoundingClientRect();
+							
+							// Check if element is in viewport
+							if(position.top < window.innerHeight && position.bottom >= 0) {
+								element.style.animation = "fadeInUp 0.6s ease forwards";
 							}
 						});
 					}
 					
-					if (!calendarEl) {
-						logDebug('Calendar container not found!', true);
-						return;
-					}
-					
-					try {
-						// Show loading message
-						calendarEl.innerHTML = '<div style="text-align: center; padding: 30px; color: white;">Loading calendar events...</div>';
-						logDebug('Initializing calendar...');
-						
-						var calendar = new FullCalendar.Calendar(calendarEl, {
-							initialView: 'dayGridMonth',
-							initialDate: new Date(), // Use current date instead of hardcoded date
-							height: 650,
-							
-							headerToolbar: {
-								left: 'prev,next today',
-								center: 'title',
-								right: 'dayGridMonth,timeGridWeek'
-							},
-							
-							buttonText: {
-								today: 'Today',
-								month: 'Month',
-								week: 'Week'
-							},
-							
-							dayHeaderFormat: { weekday: 'short' },
-							titleFormat: { year: 'numeric', month: 'long' },
-							dayMaxEvents: 3,
-							
-							// This helps debug
-							timeZone: 'Asia/Kolkata',
-							
-							eventSources: [
-								// Local events (keep these as a fallback)
-								{
-									events: [
-										{
-											title: 'Movie Night',
-											start: '2025-02-02T17:30:00'
-										},
-										{
-											title: 'Practical SMT Solvers',
-											start: '2025-02-05T17:00:00'
-										},
-										{
-											title: 'AI/ML Security',
-											start: '2025-02-12T17:00:00'
-										},
-										{
-											title: 'Microarchitecture Security',
-											start: '2025-02-19T17:00:00'
-										},
-										{
-											title: 'Advanced OSINT',
-											start: '2025-02-26T16:30:00'
-										},
-										{
-											title: 'Practical Malware Analysis',
-											start: '2025-02-26T16:30:00'
-										},
-										{
-											title: 'Weekly Meetup',
-											start: '2025-03-01T18:00:00'
-										},
-										// Add some current dates
-										{
-											title: 'Weekly Meetup (Current)',
-											start: new Date().toISOString().substring(0, 10) + 'T17:30:00' // Today at 5:30pm
-										}
-									],
-									color: 'rgba(88, 130, 193, 0.8)',
-									success: function() {
-										logDebug('Local events loaded successfully');
-									}
-								},
-								
-								// Google Calendar integration with enhanced debugging
-								{
-									googleCalendarApiKey: 'AIzaSyByaj-Ag6h20tT_WmByoQvovoSorDmQ94I',
-									googleCalendarId: '8ac3393af27eea46a81b9270b984133bd6166e640bfc51b0a2e445119443aefa@group.calendar.google.com',
-									className: 'google-event',
-									color: 'rgba(139, 195, 74, 0.8)',
-									
-									// Transform events to log them for debugging
-									eventDataTransform: function(eventData) {
-										logDebug('Google Calendar event received: ' + (eventData.title || 'Untitled'));
-										return eventData;
-									},
-									
-									// Success callback
-									success: function(events) {
-										logDebug('Google Calendar connected successfully. ' + (events ? events.length : 0) + ' events loaded.');
-									},
-									
-									// Better error handling
-									failure: function(error) {
-										logDebug('Google Calendar Error: ' + JSON.stringify(error), true);
-										
-										// Add an error indicator to the page that's visible to users
-										var errorNote = document.createElement('div');
-										errorNote.style.padding = '10px';
-										errorNote.style.margin = '10px 0';
-										errorNote.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
-										errorNote.style.color = 'white';
-										errorNote.style.borderRadius = '4px';
-										errorNote.style.textAlign = 'center';
-										
-										// Different message based on error type
-										if (error.message && error.message.includes('API key')) {
-											errorNote.textContent = 'Google Calendar API key error. Using local events only.';
-										} else if (error.message && error.message.includes('Calendar')) {
-											errorNote.textContent = 'Calendar ID not found or inaccessible. Using local events only.';
-										} else {
-											errorNote.textContent = 'Unable to load Google Calendar events. Using local events only.';
-										}
-										
-										// Insert error message below calendar
-										var legendContainer = document.querySelector('.calendar-legend');
-										if (legendContainer) {
-											legendContainer.parentNode.insertBefore(errorNote, legendContainer);
-										}
-									}
-								}
-							],
-							
-							// Event rendering function
-							eventContent: function(info) {
-								let start = info.event.start;
-								let hour = start.getHours();
-								let minute = start.getMinutes();
-								
-								let timeStr = '';
-								if (hour === 0) {
-									timeStr = '12';
-								} else if (hour > 12) {
-									timeStr = (hour - 12).toString();
-								} else {
-									timeStr = hour.toString();
-								}
-								
-								if (minute > 0) {
-									timeStr += ':' + (minute < 10 ? '0' : '') + minute;
-								}
-								timeStr += (hour < 12) ? 'a' : 'p';
-								
-								let timeEl = document.createElement('span');
-								timeEl.classList.add('fc-event-time');
-								timeEl.innerText = timeStr;
-								
-								let titleEl = document.createElement('span');
-								titleEl.classList.add('fc-event-title');
-								titleEl.innerText = info.event.title;
-								
-								return { domNodes: [timeEl, document.createTextNode(' '), titleEl] };
-							},
-							
-							// Calendar styling
-							dayCellDidMount: function(info) {
-								let dayNumberEl = info.el.querySelector('.fc-daygrid-day-number');
-								if (dayNumberEl) {
-									dayNumberEl.style.float = 'right';
-									dayNumberEl.style.margin = '0';
-									dayNumberEl.style.paddingRight = '8px';
-								}
-							},
-							
-							// Calendar resizing
-							viewDidMount: function() {
-								if (calendar) {
-									setTimeout(function() {
-										calendar.updateSize();
-										logDebug('Calendar size updated');
-									}, 100);
-								}
-							},
-							
-							// Log all calendar events
-							eventClick: function(info) {
-								logDebug('Event clicked: ' + info.event.title + ' (' + info.event.start + ')');
+					// Add animation style
+					var styleSheet = document.createElement("style");
+					styleSheet.innerHTML = `
+						@keyframes fadeInUp {
+							from {
+								opacity: 0;
+								transform: translate3d(0, 30px, 0);
 							}
-						});
-						
-						calendar.render();
-						logDebug('Calendar successfully rendered');
-						
-						// Create a global reference for debugging in console
-						window.mumbaicalendar = calendar;
-						
-						// Add detailed debug info
-						var debugInfo = {
-							'API Key': 'AIzaSyByaj-Ag6h20tT_WmByoQvovoSorDmQ94I',
-							'Calendar ID': '8ac3393af27eea46a81b9270b984133bd6166e640bfc51b0a2e445119443aefa@group.calendar.google.com',
-							'Browser': navigator.userAgent,
-							'FullCalendar Version': FullCalendar.version,
-							'Current URL': window.location.href,
-							'Protocol': window.location.protocol,
-							'Host': window.location.host,
-							'Current Date': new Date().toISOString()
-						};
-						
-						logDebug('Calendar Debug Info: ' + JSON.stringify(debugInfo, null, 2));
-						
-					} catch (error) {
-						logDebug('Error initializing calendar: ' + error.message, true);
-						calendarEl.innerHTML = '<div style="text-align: center; padding: 30px; color: white;">Error loading calendar. Please refresh the page.</div>';
-						
-						// Show iframe as fallback
-						if (iframeContainer) {
-							iframeContainer.style.display = 'block';
-							logDebug('Switched to iFrame fallback due to error', true);
+							to {
+								opacity: 1;
+								transform: translate3d(0, 0, 0);
+							}
 						}
-					}
+						
+						@keyframes pulse {
+							0% {
+								box-shadow: 0 0 0 0 rgba(74, 227, 181, 0.4);
+							}
+							70% {
+								box-shadow: 0 0 0 10px rgba(74, 227, 181, 0);
+							}
+							100% {
+								box-shadow: 0 0 0 0 rgba(74, 227, 181, 0);
+							}
+						}
+						
+						.pulse {
+							animation: pulse 2s infinite;
+						}
+					`;
+					document.head.appendChild(styleSheet);
+					
+					// Initially hide elements that will be animated
+					var elementsToAnimate = document.querySelectorAll('.feature-box, h2, .button:not(.scrolly), .calendar-container');
+					elementsToAnimate.forEach(function(element) {
+						element.style.opacity = "0";
+					});
+					
+					// Add pulse effect to important buttons
+					var importantButtons = document.querySelectorAll('#intro .button, #sponsors .button');
+					importantButtons.forEach(function(button) {
+						button.classList.add('pulse');
+					});
+					
+					// Run animation on scroll
+					window.addEventListener('scroll', animateOnScroll);
+					
+					// Run initially
+					animateOnScroll();
 				});
 			</script>
-</body>
+	</body>
 </html>
