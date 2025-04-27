@@ -505,6 +505,55 @@
 			.legend-google {
 				background-color: rgba(139, 195, 74, 0.8);
 			}
+			
+			/* Debug panel styles */
+			.debug-panel {
+				background: rgba(0, 0, 0, 0.5);
+				color: white;
+				padding: 10px;
+				margin: 10px 0;
+				border-radius: 4px;
+				font-family: monospace;
+				font-size: 12px;
+				max-height: 200px;
+				overflow-y: auto;
+				display: none;
+			}
+			
+			/* Controls for calendar options */
+			.calendar-controls {
+				margin: 15px auto;
+				text-align: center;
+				max-width: 900px;
+			}
+			
+			.calendar-controls button {
+				background-color: #4c6b9a;
+				color: white;
+				border: none;
+				padding: 8px 15px;
+				margin: 0 5px;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+			
+			.calendar-controls button:hover {
+				background-color: #5d7cad;
+			}
+			
+			/* Iframe backup option */
+			.calendar-iframe-container {
+				max-width: 900px;
+				margin: 2em auto;
+				display: none;
+			}
+			
+			.calendar-iframe {
+				width: 100%;
+				height: 600px;
+				border: none;
+				background: #2d3e5e;
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -671,9 +720,27 @@
 						<div class="inner">
 							<h2>Event Calendar</h2>
 							<p>Check out our upcoming cybersecurity events, workshops, and meetups!</p>
+							
+							<!-- Calendar controls -->
+							<div class="calendar-controls">
+								<button id="toggle-fullcalendar">FullCalendar View</button>
+								<button id="toggle-iframe">Embedded Calendar View</button>
+								<button id="debug-button">Debug Calendar</button>
+							</div>
+							
+							<!-- Debug panel for errors -->
+							<div id="debug-panel" class="debug-panel"></div>
+							
+							<!-- FullCalendar container -->
 							<div id="calendar-container">
 								<!-- Calendar will be rendered here -->
 							</div>
+							
+							<!-- iFrame fallback option -->
+							<div id="calendar-iframe-container" class="calendar-iframe-container">
+								<iframe id="calendar-iframe" class="calendar-iframe" src="https://calendar.google.com/calendar/embed?src=8ac3393af27eea46a81b9270b984133bd6166e640bfc51b0a2e445119443aefa%40group.calendar.google.com&ctz=Asia%2FKolkata" frameborder="0" scrolling="no"></iframe>
+							</div>
+							
 							<!-- Calendar Legend -->
 							<div class="calendar-legend">
 								<div class="legend-item">
@@ -764,7 +831,7 @@
 		<footer id="footer" class="wrapper style1-alt">
 			<div class="inner">
 				<div class="footer-subscribe">
-					<h3>Subscribe to Our Newsletter</h3>
+					<h3<h3>Subscribe to Our Newsletter</h3>
 					<p>Stay updated with our latest events, workshops, and cybersecurity news.</p>
 					<form id="subscribe-form" class="subscribe-form">
 						<input type="email" id="subscribe-email" placeholder="Your email address" required>
@@ -814,353 +881,421 @@
 					}
 				})();
 				
-				//
 				// Modal and Form functionality
-document.addEventListener('DOMContentLoaded', function() {
-  // Modal elements
-  var modal = document.getElementById("confirmation-modal");
-  var closeBtn = document.getElementsByClassName("close")[0];
-  var modalCloseBtn = document.getElementById("modal-close-btn");
-  var form = document.getElementById('contact-form');
-  var submitText = document.getElementById('submit-text');
-  var spinner = document.getElementById('spinner');
-  
-  if (!form) {
-    console.error("Contact form not found!");
-    return;
-  }
-  
-  // Close modal handlers
-  if (closeBtn) {
-    closeBtn.onclick = function() {
-      modal.style.display = "none";
-    }
-  }
-  
-  if (modalCloseBtn) {
-    modalCloseBtn.onclick = function() {
-      modal.style.display = "none";
-    }
-  }
-  
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-  
-  // Form submission with improved error handling
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    // Basic form validation
-    var name = document.getElementById('name').value.trim();
-    var email = document.getElementById('email').value.trim();
-    var message = document.getElementById('message').value.trim();
-    
-    if (!name || !email || !message) {
-      alert('Please fill in all fields');
-      return;
-    }
-    
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      alert('Please enter a valid email address');
-      return;
-    }
-    
-    // Show loading spinner
-    submitText.style.display = 'none';
-    spinner.style.display = 'block';
-    
-    // Log to console for debugging
-    console.log("Preparing to send email with EmailJS...");
-    
-    // Prepare email parameters
-    var templateParams = {
-      from_name: name,
-      from_email: email,
-      message: message,
-      to_name: 'MumbaiSec Admin',
-      reply_to: email,
-      to_email: 'yajwinjain@gmail.com' // Send emails to this address
-    };
-    
-    // Extended logging for debugging
-    console.log("Email parameters:", JSON.stringify(templateParams));
-    
-    // Send email with better error handling
-    // Use your actual service ID and template ID
-    emailjs.send('service_oyi7x7h', 'template_vvlwt2q', templateParams)
-      .then(function(response) {
-        console.log("EmailJS SUCCESS:", response);
-        submitText.style.display = 'inline';
-        spinner.style.display = 'none';
-        form.reset();
-        if (modal) {
-          modal.style.display = "block";
-        }
-      }, function(error) {
-        console.error("EmailJS FAILED:", error);
-        submitText.style.display = 'inline';
-        spinner.style.display = 'none';
-        alert('Failed to send message. Error: ' + error.text + '\nPlease try again or contact us directly at yajwinjain@gmail.com');
-      });
-  });
+				document.addEventListener('DOMContentLoaded', function() {
+					// Modal elements
+					var modal = document.getElementById("confirmation-modal");
+					var closeBtn = document.getElementsByClassName("close")[0];
+					var modalCloseBtn = document.getElementById("modal-close-btn");
+					var form = document.getElementById('contact-form');
+					var submitText = document.getElementById('submit-text');
+					var spinner = document.getElementById('spinner');
+					
+					if (!form) {
+						console.error("Contact form not found!");
+						return;
+					}
+					
+					// Close modal handlers
+					if (closeBtn) {
+						closeBtn.onclick = function() {
+							modal.style.display = "none";
+						}
+					}
+					
+					if (modalCloseBtn) {
+						modalCloseBtn.onclick = function() {
+							modal.style.display = "none";
+						}
+					}
+					
+					window.onclick = function(event) {
+						if (event.target == modal) {
+							modal.style.display = "none";
+						}
+					}
+					
+					// Form submission with improved error handling
+					form.addEventListener('submit', function(event) {
+						event.preventDefault();
+						
+						// Basic form validation
+						var name = document.getElementById('name').value.trim();
+						var email = document.getElementById('email').value.trim();
+						var message = document.getElementById('message').value.trim();
+						
+						if (!name || !email || !message) {
+							alert('Please fill in all fields');
+							return;
+						}
+						
+						if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+							alert('Please enter a valid email address');
+							return;
+						}
+						
+						// Show loading spinner
+						submitText.style.display = 'none';
+						spinner.style.display = 'block';
+						
+						// Log to console for debugging
+						console.log("Preparing to send email with EmailJS...");
+						
+						// Prepare email parameters
+						var templateParams = {
+							from_name: name,
+							from_email: email,
+							message: message,
+							to_name: 'MumbaiSec Admin',
+							reply_to: email,
+							to_email: 'yajwinjain@gmail.com' // Send emails to this address
+						};
+						
+						// Extended logging for debugging
+						console.log("Email parameters:", JSON.stringify(templateParams));
+						
+						// Send email with better error handling
+						// Use your actual service ID and template ID
+						emailjs.send('service_oyi7x7h', 'template_vvlwt2q', templateParams)
+							.then(function(response) {
+								console.log("EmailJS SUCCESS:", response);
+								submitText.style.display = 'inline';
+								spinner.style.display = 'none';
+								form.reset();
+								if (modal) {
+									modal.style.display = "block";
+								}
+							}, function(error) {
+								console.error("EmailJS FAILED:", error);
+								submitText.style.display = 'inline';
+								spinner.style.display = 'none';
+								alert('Failed to send message. Error: ' + error.text + '\nPlease try again or contact us directly at yajwinjain@gmail.com');
+							});
+					});
 
-  // Newsletter subscription form
-  var subscribeForm = document.getElementById('subscribe-form');
-  var subscriptionSuccess = document.getElementById('subscription-success');
+					// Newsletter subscription form
+					var subscribeForm = document.getElementById('subscribe-form');
+					var subscriptionSuccess = document.getElementById('subscription-success');
 
-  if (subscribeForm) {
-    subscribeForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-      
-      var email = document.getElementById('subscribe-email').value.trim();
-      
-      if (!email) {
-        alert('Please enter your email address');
-        return;
-      }
-      
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        alert('Please enter a valid email address');
-        return;
-      }
-      
-      console.log("Preparing to send newsletter subscription...");
-      
-      // Newsletter subscription parameters
-      var subscribeParams = {
-        from_email: email,
-        to_email: 'yajwinjain@gmail.com',
-        subscription_type: 'MumbaiSec Newsletter',
-        message: 'New newsletter subscription request from ' + email
-      };
-      
-      // Use your actual service ID and template ID for newsletter subscriptions 
-      emailjs.send('service_oyi7x7h', 'template_vvlwt2q', subscribeParams)
-        .then(function(response) {
-          console.log("Newsletter subscription SUCCESS:", response);
-          subscribeForm.reset();
-          if (subscriptionSuccess) {
-            subscriptionSuccess.style.display = 'block';
-            
-            // Hide the success message after 5 seconds
-            setTimeout(function() {
-              subscriptionSuccess.style.display = 'none';
-            }, 5000);
-          }
-        }, function(error) {
-          console.error("Newsletter subscription FAILED:", error);
-          alert('Failed to subscribe. Error: ' + error.text);
-        });
-    });
-  }
-});
-// Calendar Script with Google Calendar Integration
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar-container');
-  
-  if (!calendarEl) {
-    console.error('Calendar container not found!');
-    return;
-  }
-  
-  try {
-    // Show loading message
-    calendarEl.innerHTML = '<div style="text-align: center; padding: 30px; color: white;">Loading calendar events...</div>';
-    
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth',
-      initialDate: new Date(), // Use current date instead of hardcoded date
-      height: 650,
-      
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek'
-      },
-      
-      buttonText: {
-        today: 'Today',
-        month: 'Month',
-        week: 'Week'
-      },
-      
-      dayHeaderFormat: { weekday: 'short' },
-      titleFormat: { year: 'numeric', month: 'long' },
-      dayMaxEvents: 3,
-      
-      eventSources: [
-        // Local events (keep these as a fallback)
-        {
-          events: [
-            {
-              title: 'Movie Night',
-              start: '2025-02-02T17:30:00'
-            },
-            {
-              title: 'Practical SMT Solvers',
-              start: '2025-02-05T17:00:00'
-            },
-            {
-              title: 'AI/ML Security',
-              start: '2025-02-12T17:00:00'
-            },
-            {
-              title: 'Microarchitecture Security',
-              start: '2025-02-19T17:00:00'
-            },
-            {
-              title: 'Advanced OSINT',
-              start: '2025-02-26T16:30:00'
-            },
-            {
-              title: 'Practical Malware Analysis',
-              start: '2025-02-26T16:30:00'
-            },
-            {
-              title: 'Weekly Meetup',
-              start: '2025-03-01T18:00:00'
-            },
-            // Add some current events
-            {
-              title: 'Weekly Meetup',
-              start: new Date(new Date().setDate(new Date().getDate() + 2)) // 2 days from now
-            }
-          ]
-        },
-        
-        // Google Calendar integration with proper error handling
-        {
-          // Your Google Calendar API key (from your screenshots)
-          googleCalendarApiKey: 'AIzaSyByaj-Ag6h20tT_WmByoQvovoSorDmQ94I',
-          
-          // Your actual MumbaiSec Events calendar ID (from your screenshots)
-          googleCalendarId: '8ac3393af27eea46a81b9270b984133bd6166e640bfc51b0a2e445119443aefa@group.calendar.google.com',
-          
-          className: 'google-event',
-          color: 'rgba(139, 195, 74, 0.8)',
-          
-          // Better error handling
-          failure: function(error) {
-            console.error('Google Calendar Error:', JSON.stringify(error));
-            
-            // Add an error indicator to the page that's visible to users
-            var errorNote = document.createElement('div');
-            errorNote.style.padding = '10px';
-            errorNote.style.margin = '10px 0';
-            errorNote.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
-            errorNote.style.color = 'white';
-            errorNote.style.borderRadius = '4px';
-            errorNote.style.textAlign = 'center';
-            
-            // Different message based on error type
-            if (error.message && error.message.includes('API key')) {
-              errorNote.textContent = 'Google Calendar API key error. Using local events only.';
-            } else if (error.message && error.message.includes('Calendar')) {
-              errorNote.textContent = 'Calendar ID not found or inaccessible. Using local events only.';
-            } else {
-              errorNote.textContent = 'Unable to load Google Calendar events. Using local events only.';
-            }
-            
-            // Insert error message below calendar
-            var legendContainer = document.querySelector('.calendar-legend');
-            if (legendContainer) {
-              legendContainer.parentNode.insertBefore(errorNote, legendContainer);
-            }
-          }
-        }
-      ],
-      
-      // Event rendering function
-      eventContent: function(info) {
-        let start = info.event.start;
-        let hour = start.getHours();
-        let minute = start.getMinutes();
-        
-        let timeStr = '';
-        if (hour === 0) {
-          timeStr = '12';
-        } else if (hour > 12) {
-          timeStr = (hour - 12).toString();
-        } else {
-          timeStr = hour.toString();
-        }
-        
-        if (minute > 0) {
-          timeStr += ':' + (minute < 10 ? '0' : '') + minute;
-        }
-        timeStr += (hour < 12) ? 'a' : 'p';
-        
-        let timeEl = document.createElement('span');
-        timeEl.classList.add('fc-event-time');
-        timeEl.innerText = timeStr;
-        
-        let titleEl = document.createElement('span');
-        titleEl.classList.add('fc-event-title');
-        titleEl.innerText = info.event.title;
-        
-        return { domNodes: [timeEl, document.createTextNode(' '), titleEl] };
-      },
-      
-      // Calendar styling
-      dayCellDidMount: function(info) {
-        let dayNumberEl = info.el.querySelector('.fc-daygrid-day-number');
-        if (dayNumberEl) {
-          dayNumberEl.style.float = 'right';
-          dayNumberEl.style.margin = '0';
-          dayNumberEl.style.paddingRight = '8px';
-        }
-      },
-      
-      // Calendar resizing
-      viewDidMount: function() {
-        if (calendar) {
-          setTimeout(function() {
-            calendar.updateSize();
-          }, 100);
-        }
-      }
-    });
-    
-    calendar.render();
-    console.log('Calendar successfully rendered');
-    
-    // Add a debug button for admins (hidden by default)
-    var debugButton = document.createElement('button');
-    debugButton.textContent = 'Debug Calendar';
-    debugButton.style.display = 'none'; // Set to 'block' for testing
-    debugButton.style.margin = '10px auto';
-    debugButton.style.padding = '5px 10px';
-    debugButton.style.backgroundColor = '#344b7c';
-    debugButton.style.color = 'white';
-    debugButton.style.border = 'none';
-    debugButton.style.borderRadius = '4px';
-    
-    debugButton.onclick = function() {
-      var debugInfo = {
-        'API Key': 'AIzaSyByaj-Ag6h20tT_WmByoQvovoSorDmQ94I',
-        'Calendar ID': '8ac3393af27eea46a81b9270b984133bd6166e640bfc51b0a2e445119443aefa@group.calendar.google.com',
-        'Current URL': window.location.href,
-        'Calendar Element': calendarEl ? 'Found' : 'Not Found',
-        'Today': new Date().toISOString()
-      };
-      
-      console.log('Calendar Debug Info:', debugInfo);
-      alert('Debug info printed to console');
-    };
-    
-    // Add the debug button below the calendar (only visible when needed)
-    calendarEl.parentNode.appendChild(debugButton);
-    
-  } catch (error) {
-    console.error('Error initializing calendar:', error);
-    calendarEl.innerHTML = '<div style="text-align: center; padding: 30px; color: white;">Error loading calendar. Please refresh the page.</div>';
-  }
-});
-
-// Close the HTML document
-</script>
+					if (subscribeForm) {
+						subscribeForm.addEventListener('submit', function(event) {
+							event.preventDefault();
+							
+							var email = document.getElementById('subscribe-email').value.trim();
+							
+							if (!email) {
+								alert('Please enter your email address');
+								return;
+							}
+							
+							if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+								alert('Please enter a valid email address');
+								return;
+							}
+							
+							console.log("Preparing to send newsletter subscription...");
+							
+							// Newsletter subscription parameters
+							var subscribeParams = {
+								from_email: email,
+								to_email: 'yajwinjain@gmail.com',
+								subscription_type: 'MumbaiSec Newsletter',
+								message: 'New newsletter subscription request from ' + email
+							};
+							
+							// Use your actual service ID and template ID for newsletter subscriptions 
+							emailjs.send('service_oyi7x7h', 'template_vvlwt2q', subscribeParams)
+								.then(function(response) {
+									console.log("Newsletter subscription SUCCESS:", response);
+									subscribeForm.reset();
+									if (subscriptionSuccess) {
+										subscriptionSuccess.style.display = 'block';
+										
+										// Hide the success message after 5 seconds
+										setTimeout(function() {
+											subscriptionSuccess.style.display = 'none';
+										}, 5000);
+									}
+								}, function(error) {
+									console.error("Newsletter subscription FAILED:", error);
+									alert('Failed to subscribe. Error: ' + error.text);
+								});
+						});
+					}
+				});
+			</script>
+			
+			<!-- Calendar Script with improved debugging and fallback options -->
+			<script type="text/javascript">
+				document.addEventListener('DOMContentLoaded', function() {
+					var calendarEl = document.getElementById('calendar-container');
+					var iframeContainer = document.getElementById('calendar-iframe-container');
+					var debugPanel = document.getElementById('debug-panel');
+					var debugButton = document.getElementById('debug-button');
+					var toggleFullCalendarBtn = document.getElementById('toggle-fullcalendar');
+					var toggleIframeBtn = document.getElementById('toggle-iframe');
+					
+					// Function to add debug messages
+					function logDebug(message, isError) {
+						if (!debugPanel) return;
+						
+						var msgElement = document.createElement('div');
+						msgElement.textContent = new Date().toLocaleTimeString() + ': ' + message;
+						
+						if (isError) {
+							msgElement.style.color = '#ff6b6b';
+							console.error(message);
+						} else {
+							console.log(message);
+						}
+						
+						debugPanel.appendChild(msgElement);
+						// Auto-scroll to latest message
+						debugPanel.scrollTop = debugPanel.scrollHeight;
+					}
+					
+					// Toggle view buttons
+					if (toggleFullCalendarBtn) {
+						toggleFullCalendarBtn.addEventListener('click', function() {
+							if (calendarEl) calendarEl.style.display = 'block';
+							if (iframeContainer) iframeContainer.style.display = 'none';
+							logDebug('Switched to FullCalendar view');
+						});
+					}
+					
+					if (toggleIframeBtn) {
+						toggleIframeBtn.addEventListener('click', function() {
+							if (calendarEl) calendarEl.style.display = 'none';
+							if (iframeContainer) iframeContainer.style.display = 'block';
+							logDebug('Switched to iFrame embedded view');
+						});
+					}
+					
+					// Debug button
+					if (debugButton) {
+						debugButton.addEventListener('click', function() {
+							if (debugPanel) {
+								debugPanel.style.display = debugPanel.style.display === 'none' ? 'block' : 'none';
+								logDebug('Debug panel toggled');
+							}
+						});
+					}
+					
+					if (!calendarEl) {
+						logDebug('Calendar container not found!', true);
+						return;
+					}
+					
+					try {
+						// Show loading message
+						calendarEl.innerHTML = '<div style="text-align: center; padding: 30px; color: white;">Loading calendar events...</div>';
+						logDebug('Initializing calendar...');
+						
+						var calendar = new FullCalendar.Calendar(calendarEl, {
+							initialView: 'dayGridMonth',
+							initialDate: new Date(), // Use current date instead of hardcoded date
+							height: 650,
+							
+							headerToolbar: {
+								left: 'prev,next today',
+								center: 'title',
+								right: 'dayGridMonth,timeGridWeek'
+							},
+							
+							buttonText: {
+								today: 'Today',
+								month: 'Month',
+								week: 'Week'
+							},
+							
+							dayHeaderFormat: { weekday: 'short' },
+							titleFormat: { year: 'numeric', month: 'long' },
+							dayMaxEvents: 3,
+							
+							// This helps debug
+							timeZone: 'Asia/Kolkata',
+							
+							eventSources: [
+								// Local events (keep these as a fallback)
+								{
+									events: [
+										{
+											title: 'Movie Night',
+											start: '2025-02-02T17:30:00'
+										},
+										{
+											title: 'Practical SMT Solvers',
+											start: '2025-02-05T17:00:00'
+										},
+										{
+											title: 'AI/ML Security',
+											start: '2025-02-12T17:00:00'
+										},
+										{
+											title: 'Microarchitecture Security',
+											start: '2025-02-19T17:00:00'
+										},
+										{
+											title: 'Advanced OSINT',
+											start: '2025-02-26T16:30:00'
+										},
+										{
+											title: 'Practical Malware Analysis',
+											start: '2025-02-26T16:30:00'
+										},
+										{
+											title: 'Weekly Meetup',
+											start: '2025-03-01T18:00:00'
+										},
+										// Add some current dates
+										{
+											title: 'Weekly Meetup (Current)',
+											start: new Date().toISOString().substring(0, 10) + 'T17:30:00' // Today at 5:30pm
+										}
+									],
+									color: 'rgba(88, 130, 193, 0.8)',
+									success: function() {
+										logDebug('Local events loaded successfully');
+									}
+								},
+								
+								// Google Calendar integration with enhanced debugging
+								{
+									googleCalendarApiKey: 'AIzaSyByaj-Ag6h20tT_WmByoQvovoSorDmQ94I',
+									googleCalendarId: '8ac3393af27eea46a81b9270b984133bd6166e640bfc51b0a2e445119443aefa@group.calendar.google.com',
+									className: 'google-event',
+									color: 'rgba(139, 195, 74, 0.8)',
+									
+									// Transform events to log them for debugging
+									eventDataTransform: function(eventData) {
+										logDebug('Google Calendar event received: ' + (eventData.title || 'Untitled'));
+										return eventData;
+									},
+									
+									// Success callback
+									success: function(events) {
+										logDebug('Google Calendar connected successfully. ' + (events ? events.length : 0) + ' events loaded.');
+									},
+									
+									// Better error handling
+									failure: function(error) {
+										logDebug('Google Calendar Error: ' + JSON.stringify(error), true);
+										
+										// Add an error indicator to the page that's visible to users
+										var errorNote = document.createElement('div');
+										errorNote.style.padding = '10px';
+										errorNote.style.margin = '10px 0';
+										errorNote.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
+										errorNote.style.color = 'white';
+										errorNote.style.borderRadius = '4px';
+										errorNote.style.textAlign = 'center';
+										
+										// Different message based on error type
+										if (error.message && error.message.includes('API key')) {
+											errorNote.textContent = 'Google Calendar API key error. Using local events only.';
+										} else if (error.message && error.message.includes('Calendar')) {
+											errorNote.textContent = 'Calendar ID not found or inaccessible. Using local events only.';
+										} else {
+											errorNote.textContent = 'Unable to load Google Calendar events. Using local events only.';
+										}
+										
+										// Insert error message below calendar
+										var legendContainer = document.querySelector('.calendar-legend');
+										if (legendContainer) {
+											legendContainer.parentNode.insertBefore(errorNote, legendContainer);
+										}
+									}
+								}
+							],
+							
+							// Event rendering function
+							eventContent: function(info) {
+								let start = info.event.start;
+								let hour = start.getHours();
+								let minute = start.getMinutes();
+								
+								let timeStr = '';
+								if (hour === 0) {
+									timeStr = '12';
+								} else if (hour > 12) {
+									timeStr = (hour - 12).toString();
+								} else {
+									timeStr = hour.toString();
+								}
+								
+								if (minute > 0) {
+									timeStr += ':' + (minute < 10 ? '0' : '') + minute;
+								}
+								timeStr += (hour < 12) ? 'a' : 'p';
+								
+								let timeEl = document.createElement('span');
+								timeEl.classList.add('fc-event-time');
+								timeEl.innerText = timeStr;
+								
+								let titleEl = document.createElement('span');
+								titleEl.classList.add('fc-event-title');
+								titleEl.innerText = info.event.title;
+								
+								return { domNodes: [timeEl, document.createTextNode(' '), titleEl] };
+							},
+							
+							// Calendar styling
+							dayCellDidMount: function(info) {
+								let dayNumberEl = info.el.querySelector('.fc-daygrid-day-number');
+								if (dayNumberEl) {
+									dayNumberEl.style.float = 'right';
+									dayNumberEl.style.margin = '0';
+									dayNumberEl.style.paddingRight = '8px';
+								}
+							},
+							
+							// Calendar resizing
+							viewDidMount: function() {
+								if (calendar) {
+									setTimeout(function() {
+										calendar.updateSize();
+										logDebug('Calendar size updated');
+									}, 100);
+								}
+							},
+							
+							// Log all calendar events
+							eventClick: function(info) {
+								logDebug('Event clicked: ' + info.event.title + ' (' + info.event.start + ')');
+							}
+						});
+						
+						calendar.render();
+						logDebug('Calendar successfully rendered');
+						
+						// Create a global reference for debugging in console
+						window.mumbaicalendar = calendar;
+						
+						// Add detailed debug info
+						var debugInfo = {
+							'API Key': 'AIzaSyByaj-Ag6h20tT_WmByoQvovoSorDmQ94I',
+							'Calendar ID': '8ac3393af27eea46a81b9270b984133bd6166e640bfc51b0a2e445119443aefa@group.calendar.google.com',
+							'Browser': navigator.userAgent,
+							'FullCalendar Version': FullCalendar.version,
+							'Current URL': window.location.href,
+							'Protocol': window.location.protocol,
+							'Host': window.location.host,
+							'Current Date': new Date().toISOString()
+						};
+						
+						logDebug('Calendar Debug Info: ' + JSON.stringify(debugInfo, null, 2));
+						
+					} catch (error) {
+						logDebug('Error initializing calendar: ' + error.message, true);
+						calendarEl.innerHTML = '<div style="text-align: center; padding: 30px; color: white;">Error loading calendar. Please refresh the page.</div>';
+						
+						// Show iframe as fallback
+						if (iframeContainer) {
+							iframeContainer.style.display = 'block';
+							logDebug('Switched to iFrame fallback due to error', true);
+						}
+					}
+				});
+			</script>
 </body>
 </html>
