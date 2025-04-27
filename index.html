@@ -790,64 +790,163 @@
 						</div>
 					</section>
 
-				<!-- Contact -->
-					<section id="three" class="wrapper style3 fade-up">
-						<div class="inner">
-							<h2>Get in Touch</h2>
-							<p>Interested in joining MumbaiSec or have questions? Reach out to us!</p>
-							<div class="split style1">
-								<section>
-									<form id="contact-form">
-										<div class="fields">
-											<div class="field half">
-												<label for="name">Name</label>
-												<input type="text" name="name" id="name" required />
-											</div>
-											<div class="field half">
-												<label for="email">Email</label>
-												<input type="email" name="email" id="email" required />
-											</div>
-											<div class="field">
-												<label for="message">Message</label>
-												<textarea name="message" id="message" rows="5" required></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li>
-												<button type="submit" class="button submit">
-													<span id="submit-text">Send Message</span>
-													<div id="spinner" class="spinner"></div>
-												</button>
-											</li>
-										</ul>
-									</form>
-								</section>
-								<section>
-									<ul class="contact">
-										<li>
-											<h3>Location</h3>
-											<span>Mumbai, Maharashtra<br />
-											India</span>
-										</li>
-										<li>
-											<h3>Email</h3>
-											<span>yajwinjain@gmail.com</span>
-										</li>
-										<li>
-											<h3>Social</h3>
-											<ul class="icons">
-												<li><a href="#" class="icon brands fab fa-discord"><span class="label">Discord</span></a></li>
-												<li><a href="#" class="icon brands fab fa-twitter"><span class="label">Twitter</span></a></li>
-												<li><a href="#" class="icon brands fab fa-github"><span class="label">GitHub</span></a></li>
-											</ul>
-										</li>
-									</ul>
-								</section>
-							</div>
-						</div>
-					</section>
-
+				<!-- Contact Section with Direct Email Alternative -->
+<section id="three" class="wrapper style3 fade-up">
+	<div class="inner">
+	  <h2>Get in Touch</h2>
+	  <p>Interested in joining MumbaiSec or have questions? Reach out to us!</p>
+	  
+	  <!-- Notice Banner -->
+	  <div class="notice-banner">
+		<i class="fas fa-info-circle"></i>
+		<p>Our contact form is currently undergoing maintenance. Please email us directly at <a href="mailto:yajwinjain@gmail.com">yajwinjain@gmail.com</a> and we'll get back to you as soon as possible.</p>
+	  </div>
+  
+	  <div class="split style1">
+		<section>
+		  <!-- Email Contact Info Card -->
+		  <div class="email-contact-card">
+			<div class="icon-container">
+			  <i class="fas fa-envelope"></i>
 			</div>
+			<h3>Email Us Directly</h3>
+			<p>Send your inquiries to:</p>
+			<a href="mailto:yajwinjain@gmail.com" class="email-link">yajwinjain@gmail.com</a>
+			<p class="response-note">We typically respond within 24-48 hours.</p>
+			<a href="mailto:yajwinjain@gmail.com" class="button">Send Email Now</a>
+		  </div>
+		</section>
+		<section>
+		  <ul class="contact">
+			<li>
+			  <h3>Location</h3>
+			  <span>Mumbai, Maharashtra<br />
+			  India</span>
+			</li>
+			<li>
+			  <h3>Email</h3>
+			  <span>yajwinjain@gmail.com</span>
+			</li>
+			<li>
+			  <h3>Social</h3>
+			  <ul class="icons">
+				<li><a href="#" class="icon brands fab fa-discord"><span class="label">Discord</span></a></li>
+				<li><a href="#" class="icon brands fab fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon brands fab fa-github"><span class="label">GitHub</span></a></li>
+			  </ul>
+			</li>
+		  </ul>
+		</section>
+	  </div>
+	</div>
+  </section>
+  
+  <!-- Add these styles to your CSS -->
+  <style>
+	/* Notice Banner styling */
+	.notice-banner {
+	  background-color: rgba(255, 165, 0, 0.1);
+	  border-left: 4px solid var(--cyber-accent-2);
+	  padding: 1.5em;
+	  margin-bottom: 2em;
+	  display: flex;
+	  align-items: center;
+	  border-radius: 4px;
+	}
+  
+	.notice-banner i {
+	  font-size: 2em;
+	  color: var(--cyber-accent-2);
+	  margin-right: 1em;
+	}
+  
+	.notice-banner p {
+	  margin: 0;
+	  color: var(--cyber-text);
+	}
+  
+	.notice-banner a {
+	  color: var(--cyber-accent);
+	  text-decoration: none;
+	  font-weight: bold;
+	  transition: all 0.3s;
+	}
+  
+	.notice-banner a:hover {
+	  color: var(--cyber-accent-2);
+	  text-decoration: underline;
+	}
+  
+	/* Email Contact Card styling */
+	.email-contact-card {
+	  background-color: rgba(26, 35, 51, 0.7);
+	  border: 1px solid var(--cyber-accent);
+	  padding: 2em;
+	  border-radius: 4px;
+	  text-align: center;
+	  position: relative;
+	  overflow: hidden;
+	}
+  
+	.email-contact-card::before {
+	  content: "";
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 3px;
+	  background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2));
+	}
+  
+	.icon-container {
+	  width: 80px;
+	  height: 80px;
+	  border-radius: 50%;
+	  background-color: rgba(74, 227, 181, 0.1);
+	  border: 2px solid var(--cyber-accent);
+	  margin: 0 auto 1.5em;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	}
+  
+	.icon-container i {
+	  font-size: 2.5em;
+	  color: var(--cyber-accent);
+	}
+  
+	.email-contact-card h3 {
+	  color: var(--cyber-accent);
+	  margin-bottom: 1em;
+	}
+  
+	.email-link {
+	  display: inline-block;
+	  font-size: 1.2em;
+	  color: var(--cyber-accent);
+	  margin: 1em 0;
+	  text-decoration: none;
+	  border-bottom: 1px dashed var(--cyber-accent);
+	  padding-bottom: 0.2em;
+	  transition: all 0.3s;
+	}
+  
+	.email-link:hover {
+	  color: var(--cyber-accent-2);
+	  border-bottom-color: var(--cyber-accent-2);
+	}
+  
+	.response-note {
+	  font-style: italic;
+	  opacity: 0.8;
+	  margin-bottom: 1.5em;
+	}
+  
+	.email-contact-card .button {
+	  display: inline-block;
+	  margin-top: 1em;
+	}
+  </style>
 			
 		<!-- Modal for email confirmation -->
 		<div id="confirmation-modal" class="modal">
