@@ -824,7 +824,7 @@
 			<li>
 			  <h3>Social</h3>
 			  <ul class="icons">
-				<li><a href="#" class="icon brands fab fa-discord"><span class="label">Discord</span></a></li>
+				<li><a href="https://discord.gg/3gAw8SNY" class="icon brands fab fa-discord"><span class="label">Discord</span></a></li>
 				<li><a href="#" class="icon brands fab fa-twitter"><span class="label">Twitter</span></a></li>
 				<li><a href="#" class="icon brands fab fa-github"><span class="label">GitHub</span></a></li>
 			  </ul>
@@ -834,6 +834,139 @@
 	  </div>
 	</div>
   </section>
+
+  <!-- Discord Banner Section -->
+<section id="discord-banner" class="wrapper style2 fade-up">
+	<div class="inner">
+	  <div class="discord-container">
+		<div class="discord-icon-container">
+		  <i class="fab fa-discord"></i>
+		</div>
+		<div class="discord-content">
+		  <h2>Join Our Discord Community</h2>
+		  <p>Please join our Discord community to actively engage and participate in discussions, access resources, and connect with fellow cybersecurity enthusiasts. It's where our community thrives!</p>
+		  <a href="https://discord.gg/3gAw8SNY" class="button discord-button" target="_blank">
+			<i class="fab fa-discord"></i> Join MumbaiSec Discord
+		  </a>
+		</div>
+	  </div>
+	</div>
+  </section>
+  
+  <!-- CSS Styles for Discord Banner -->
+  <style>
+	/* Discord Banner styling */
+	.discord-container {
+	  background-color: rgba(26, 35, 51, 0.7);
+	  border: 1px solid var(--cyber-accent);
+	  padding: 2.5em;
+	  border-radius: 4px;
+	  position: relative;
+	  overflow: hidden;
+	  display: flex;
+	  flex-direction: row;
+	  align-items: center;
+	  gap: 2em;
+	  margin: 3em 0;
+	}
+	
+	.discord-container::before {
+	  content: "";
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 3px;
+	  background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2));
+	}
+	
+	.discord-icon-container {
+	  min-width: 120px;
+	  height: 120px;
+	  border-radius: 50%;
+	  background-color: rgba(114, 137, 218, 0.2);
+	  border: 2px solid #7289DA;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  margin-right: 1em;
+	  position: relative;
+	  overflow: hidden;
+	}
+	
+	.discord-icon-container i {
+	  font-size: 4em;
+	  color: #7289DA;
+	  text-shadow: 0 0 10px rgba(114, 137, 218, 0.7);
+	}
+	
+	.discord-content {
+	  flex: 1;
+	}
+	
+	.discord-content h2 {
+	  color: var(--cyber-accent) !important;
+	  margin-bottom: 0.5em !important;
+	  font-size: 2em !important;
+	}
+	
+	.discord-content p {
+	  color: var(--cyber-text) !important;
+	  margin-bottom: 1.5em !important;
+	  font-size: 1.1em !important;
+	  line-height: 1.6 !important;
+	}
+	
+	.discord-button {
+	  background-color: #7289DA !important;
+	  border-color: #7289DA !important;
+	  color: white !important;
+	  display: inline-flex !important;
+	  align-items: center !important;
+	  gap: 0.5em !important;
+	  transition: all 0.3s ease !important;
+	}
+	
+	.discord-button:hover {
+	  background-color: #5e77d4 !important;
+	  box-shadow: 0 0 15px rgba(114, 137, 218, 0.7) !important;
+	  transform: translateY(-2px) !important;
+	}
+	
+	.discord-button i {
+	  font-size: 1.2em !important;
+	}
+	
+	/* Animation for the Discord icon */
+	@keyframes pulse-discord {
+	  0% {
+		box-shadow: 0 0 0 0 rgba(114, 137, 218, 0.4);
+	  }
+	  70% {
+		box-shadow: 0 0 0 15px rgba(114, 137, 218, 0);
+	  }
+	  100% {
+		box-shadow: 0 0 0 0 rgba(114, 137, 218, 0);
+	  }
+	}
+	
+	.discord-icon-container {
+	  animation: pulse-discord 2s infinite;
+	}
+	
+	/* Mobile responsiveness */
+	@media screen and (max-width: 768px) {
+	  .discord-container {
+		flex-direction: column;
+		text-align: center;
+		padding: 2em 1.5em;
+	  }
+	  
+	  .discord-icon-container {
+		margin: 0 auto 1.5em auto;
+	  }
+	}
+  </style>
   
   <!-- Add these styles to your CSS -->
   <style>
