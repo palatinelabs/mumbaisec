@@ -551,7 +551,7 @@
 			}
 			
 			.logo-image {
-				max-width: 300px;
+				max-width: 200px;
 				height: auto;
 				margin: 0 auto;
 				display: block;
@@ -647,6 +647,76 @@
 					grid-template-columns: 1fr !important;
 				}
 			}
+			
+			/* Email contact card styling */
+			.email-contact-card {
+				background-color: rgba(26, 35, 51, 0.7);
+				border: 1px solid var(--cyber-accent);
+				padding: 2em;
+				border-radius: 4px;
+				text-align: center;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			.email-contact-card::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 3px;
+				background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2));
+			}
+			
+			.icon-container {
+				width: 80px;
+				height: 80px;
+				border-radius: 50%;
+				background-color: rgba(74, 227, 181, 0.1);
+				border: 2px solid var(--cyber-accent);
+				margin: 0 auto 1.5em;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			
+			.icon-container i {
+				font-size: 2.5em;
+				color: var(--cyber-accent);
+			}
+			
+			.email-contact-card h3 {
+				color: var(--cyber-accent);
+				margin-bottom: 1em;
+			}
+			
+			.email-link {
+				display: inline-block;
+				font-size: 1.2em;
+				color: var(--cyber-accent);
+				margin: 1em 0;
+				text-decoration: none;
+				border-bottom: 1px dashed var(--cyber-accent);
+				padding-bottom: 0.2em;
+				transition: all 0.3s;
+			}
+			
+			.email-link:hover {
+				color: var(--cyber-accent-2);
+				border-bottom-color: var(--cyber-accent-2);
+			}
+			
+			.response-note {
+				font-style: italic;
+				opacity: 0.8;
+				margin-bottom: 1.5em;
+			}
+			
+			.email-contact-card .button {
+				display: inline-block;
+				margin-top: 1em;
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -663,9 +733,9 @@
 							<li><a href="#one">What We're About</a></li>
 							<li><a href="#two">Skills & Training</a></li>
 							<li><a href="#activities">Our Activities</a></li>
-							<li><a href="#discord">Join Discord</a></li>
 							<li><a href="#calendar">Calendar</a></li>
 							<li><a href="#sponsors">Sponsors</a></li>
+							<li><a href="#discord">Join Discord</a></li>
 							<li><a href="#three">Get in Touch</a></li>
 						</ul>
 					</nav>
@@ -678,9 +748,6 @@
 				<!-- Intro -->
 					<section id="intro" class="wrapper style1 fullscreen fade-up">
 						<div class="inner">
-							<div class="logo-container">
-								<img src="images/mumbaisec-logo.png" alt="MumbaiSec Logo" class="logo-image" />
-							</div>
 							<h1 class="glitch-text">Welcome to MumbaiSec</h1>
 							<p class="major">Mumbai's Premier Cybersecurity Community</p>
 							<p>Are you passionate about cybersecurity? Looking to enhance your skills, network with like-minded individuals, or just starting your journey in the world of information security?</p>
@@ -725,8 +792,7 @@
 							</div>
 							<div class="skill-content">
 								<h3>CRYPTOGRAPHY</h3>
-								<p>The practice and study of techniques for secure communication in the presence of adversarial behavior.</p>
-							</div>
+								<p>The practice and study of techniques for secure communication in the presence of adversarial behavior.</p></div>
 							</div>
 							
 							<!-- Reverse Engineering -->
@@ -779,332 +845,331 @@
 								<i class="fa-solid fa-network-wired"></i>
 							</div>
 							<div class="skill-content">
-								<h3>NETWORK<h3>NETWORK SECURITY</h3>
+								<h3>NETWORK SECURITY</h3>
 								<p>Understanding and implementing secure network architectures and protocols.</p>
-							  </div>
 							</div>
-						  </div>
+							</div>
 						</div>
-					  </section>
-					  
-					  <!-- Activities Section with Fixed Icons -->
-					  <section id="activities" class="wrapper style2 fade-up">
+						</div>
+					</section>
+      
+					<!-- Activities Section with Fixed Icons -->
+					<section id="activities" class="wrapper style2 fade-up">
 						<div class="inner">
-						  <h2 class="cyber-heading">OUR ACTIVITIES</h2>
-						  <p>We offer a diverse range of activities and opportunities for our members to engage with cybersecurity in practical and meaningful ways.</p>
-						  
-						  <div class="activities-grid">
+						<h2 class="cyber-heading">OUR ACTIVITIES</h2>
+						<p>We offer a diverse range of activities and opportunities for our members to engage with cybersecurity in practical and meaningful ways.</p>
+						
+						<div class="activities-grid">
 							<!-- Regular Meetings -->
 							<div class="activity-box">
-							  <div class="activity-icon">
+							<div class="activity-icon">
 								<i class="fa-solid fa-users"></i>
-							  </div>
-							  <div class="activity-content">
+							</div>
+							<div class="activity-content">
 								<h3>REGULAR MEETINGS</h3>
 								<p>Weekly meetings to discuss current cybersecurity concepts and trends, featuring hands-on learning experiences.</p>
-							  </div>
+							</div>
 							</div>
 							
 							<!-- CTF Competitions -->
 							<div class="activity-box">
-							  <div class="activity-icon">
+							<div class="activity-icon">
 								<i class="fa-solid fa-flag"></i>
-							  </div>
-							  <div class="activity-content">
+							</div>
+							<div class="activity-content">
 								<h3>CTF COMPETITIONS</h3>
 								<p>Participate in Capture The Flag competitions to test and improve your cybersecurity skills in a competitive environment.</p>
-							  </div>
+							</div>
 							</div>
 							
 							<!-- Guest Speakers -->
 							<div class="activity-box">
-							  <div class="activity-icon">
+							<div class="activity-icon">
 								<i class="fa-solid fa-chalkboard-user"></i>
-							  </div>
-							  <div class="activity-content">
+							</div>
+							<div class="activity-content">
 								<h3>GUEST SPEAKERS</h3>
 								<p>Learn from prominent industry experts and professionals through regular guest speaker sessions.</p>
-							  </div>
+							</div>
 							</div>
 							
 							<!-- Skill Development -->
 							<div class="activity-box">
-							  <div class="activity-icon">
+							<div class="activity-icon">
 								<i class="fa-solid fa-laptop-code"></i>
-							  </div>
-							  <div class="activity-content">
+							</div>
+							<div class="activity-content">
 								<h3>SKILL DEVELOPMENT</h3>
 								<p>Hands-on training sessions to develop practical cybersecurity skills and knowledge.</p>
-							  </div>
+							</div>
 							</div>
 							
 							<!-- Networking -->
 							<div class="activity-box">
-							  <div class="activity-icon">
+							<div class="activity-icon">
 								<i class="fa-solid fa-handshake"></i>
-							  </div>
-							  <div class="activity-content">
+							</div>
+							<div class="activity-content">
 								<h3>NETWORKING</h3>
 								<p>Connect with like-minded individuals, professionals, and enthusiasts in the cybersecurity community.</p>
-							  </div>
+							</div>
 							</div>
 							
 							<!-- Fun & Food -->
 							<div class="activity-box">
-							  <div class="activity-icon">
+							<div class="activity-icon">
 								<i class="fa-solid fa-face-smile"></i>
-							  </div>
-							  <div class="activity-content">
+							</div>
+							<div class="activity-content">
 								<h3>FUN & FOOD</h3>
 								<p>Enjoy gaming sessions, good food, and social activities while building lasting connections in the security community.</p>
-							  </div>
 							</div>
-						  </div>
+							</div>
 						</div>
-					  </section>
-				
-					  <!-- Discord Banner Section -->
-					  <section id="discord" class="wrapper style3 fade-up">
-						<div class="inner">
-						  <div class="discord-container">
-							<div class="discord-icon-container">
-							  <i class="fab fa-discord"></i>
-							</div>
-							<div class="discord-content">
-							  <h2>Join Our Discord Community</h2>
-							  <p>Please join our Discord community to actively engage and participate in discussions, access resources, and connect with fellow cybersecurity enthusiasts. It's where our community thrives!</p>
-							  <a href="https://discord.gg/3gAw8SNY" class="button discord-button" target="_blank">
-								<i class="fab fa-discord"></i> Join MumbaiSec Discord
-							  </a>
-							</div>
-						  </div>
 						</div>
-					  </section>
-				
-					  <!-- Calendar -->
-					  <section id="calendar" class="wrapper style2 fade-up">
+					</section>
+
+					<!-- Calendar -->
+					<section id="calendar" class="wrapper style3 fade-up">
 						<div class="inner">
-						  <h2>Event Calendar</h2>
-						  <p>Check out our upcoming cybersecurity events, workshops, and meetups!</p>
-						  
-						  <!-- Embedded Google Calendar -->
-						  <div class="calendar-container">
+						<h2>Event Calendar</h2>
+						<p>Check out our upcoming cybersecurity events, workshops, and meetups!</p>
+						
+						<!-- Embedded Google Calendar -->
+						<div class="calendar-container">
 							<iframe class="calendar-iframe" src="https://calendar.google.com/calendar/embed?src=8ac3393af27eea46a81b9270b984133bd6166e640bfc51b0a2e445119443aefa%40group.calendar.google.com&ctz=Asia%2FKolkata&bgcolor=%231a2333&color=%234ae3b5&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&showTz=1" frameborder="0" scrolling="no"></iframe>
-						  </div>
 						</div>
-					  </section>
-				
-					  <!-- Sponsors -->
-					  <section id="sponsors" class="wrapper style3 fade-up">
+						</div>
+					</section>
+
+					<!-- Sponsors -->
+					<section id="sponsors" class="wrapper style2 fade-up">
 						<div class="inner">
-						  <h2>Our Sponsors</h2>
-						  <p>We're proud to be supported by organizations that share our commitment to cybersecurity education and skill development.</p>
-						  <div style="background: rgba(26, 35, 51, 0.7); border: 1px solid var(--cyber-accent); padding: 3em; margin: 2em auto; max-width: 800px; text-align: center; position: relative;">
+						<h2>Our Sponsors</h2>
+						<p>We're proud to be supported by organizations that share our commitment to cybersecurity education and skill development.</p>
+						<div style="background: rgba(26, 35, 51, 0.7); border: 1px solid var(--cyber-accent); padding: 3em; margin: 2em auto; max-width: 800px; text-align: center; position: relative;">
 							<div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2));"></div>
 							<h3>Become a Sponsor</h3>
 							<p style="margin: 1em 0 2em 0;">Sponsorship is a great way to support our mission and reach out to our members. Through sponsorship, your organization can help organize outreach events, give workshops, and more.</p>
 							<a href="#three" class="button">Contact Us About Sponsorship</a>
-						  </div>
 						</div>
-					  </section>
-				
-					  <!-- Contact Section with Direct Email Alternative -->
-					  <section id="three" class="wrapper style2 fade-up">
+						</div>
+					</section>
+
+					<!-- Discord Banner Section -->
+					<section id="discord" class="wrapper style3 fade-up">
 						<div class="inner">
-						  <h2>Get in Touch</h2>
-						  <p>Interested in joining MumbaiSec or have questions? Reach out to us!</p>
-					  
-						  <div class="split style1">
+						<div class="discord-container">
+							<div class="discord-icon-container">
+							<i class="fab fa-discord"></i>
+							</div>
+							<div class="discord-content">
+							<h2>Join Our Discord Community</h2>
+							<p>Please join our Discord community to actively engage and participate in discussions, access resources, and connect with fellow cybersecurity enthusiasts. It's where our community thrives!</p>
+							<a href="https://discord.gg/3gAw8SNY" class="button discord-button" target="_blank">
+								<i class="fab fa-discord"></i> Join MumbaiSec Discord
+							</a>
+							</div>
+						</div>
+						</div>
+					</section>
+
+					<!-- Contact Section with Direct Email Alternative -->
+					<section id="three" class="wrapper style2 fade-up">
+						<div class="inner">
+						<h2>Get in Touch</h2>
+						<p>Interested in joining MumbaiSec or have questions? Reach out to us!</p>
+					
+						<div class="split style1">
 							<section>
-							  <!-- Email Contact Info Card -->
-							  <div class="email-contact-card">
+							<!-- Email Contact Info Card -->
+							<div class="email-contact-card">
 								<div class="icon-container">
-								  <i class="fas fa-envelope"></i>
+								<i class="fas fa-envelope"></i>
 								</div>
 								<h3>Email Us Directly</h3>
 								<p>Send your inquiries to:</p>
 								<a href="mailto:yajwinjain@gmail.com" class="email-link">yajwinjain@gmail.com</a>
 								<p class="response-note">We typically respond within 24-48 hours.</p>
 								<a href="mailto:yajwinjain@gmail.com" class="button">Send Email Now</a>
-							  </div>
+							</div>
 							</section>
 							<section>
-							  <ul class="contact">
+							<ul class="contact">
 								<li>
-								  <h3>Location</h3>
-								  <span>Mumbai, Maharashtra<br />
-								  India</span>
+								<h3>Location</h3>
+								<span>Mumbai, Maharashtra<br />
+								India</span>
 								</li>
 								<li>
-								  <h3>Email</h3>
-								  <span>yajwinjain@gmail.com</span>
+								<h3>Email</h3>
+								<span>yajwinjain@gmail.com</span>
 								</li>
 								<li>
-								  <h3>Social</h3>
-								  <ul class="icons">
+								<h3>Social</h3>
+								<ul class="icons">
 									<li><a href="https://discord.gg/3gAw8SNY" class="icon brands fab fa-discord"><span class="label">Discord</span></a></li>
 									<li><a href="#" class="icon brands fab fa-twitter"><span class="label">Twitter</span></a></li>
 									<li><a href="#" class="icon brands fab fa-github"><span class="label">GitHub</span></a></li>
-								  </ul>
+								</ul>
 								</li>
-							  </ul>
+							</ul>
 							</section>
-						  </div>
 						</div>
-					  </section>
-							
+						</div>
+					</section>
+						
 					<!-- Modal for email confirmation -->
 					<div id="confirmation-modal" class="modal">
-					  <div class="modal-content">
-						<span class="close">×</span>
-						<h2>Thank You!</h2>
-						<p>Your message has been sent successfully. We'll get back to you soon!</p>
-						<button class="modal-button" id="modal-close-btn">Close</button>
-					  </div>
+						<div class="modal-content">
+							<span class="close">×</span>
+							<h2>Thank You!</h2>
+							<p>Your message has been sent successfully. We'll get back to you soon!</p>
+							<button class="modal-button" id="modal-close-btn">Close</button>
+						</div>
 					</div>
-				
-					<!-- Scripts -->
-					  <script src="assets/js/jquery.min.js"></script>
-					  <script src="assets/js/jquery.scrollex.min.js"></script>
-					  <script src="assets/js/jquery.scrolly.min.js"></script>
-					  <script src="assets/js/browser.min.js"></script>
-					  <script src="assets/js/breakpoints.min.js"></script>
-					  <script src="assets/js/util.js"></script>
-					  <script src="assets/js/main.js"></script>
-					  <!-- FullCalendar JS -->
-					  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-					  
-					  <!-- Email Form Script -->
-					  <!-- EmailJS Form Script -->
-					  <script type="text/javascript">
+
+				<!-- Scripts -->
+					<script src="assets/js/jquery.min.js"></script>
+					<script src="assets/js/jquery.scrollex.min.js"></script>
+					<script src="assets/js/jquery.scrolly.min.js"></script>
+					<script src="assets/js/browser.min.js"></script>
+					<script src="assets/js/breakpoints.min.js"></script>
+					<script src="assets/js/util.js"></script>
+					<script src="assets/js/main.js"></script>
+					<!-- FullCalendar JS -->
+					<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+					
+					<!-- Email Form Script -->
+					<script type="text/javascript">
 						document.addEventListener('DOMContentLoaded', function() {
-						  // Get form elements
-						  const contactForm = document.getElementById('contact-form');
-						  const submitText = document.getElementById('submit-text');
-						  const spinner = document.getElementById('spinner');
-						  const modal = document.getElementById('confirmation-modal');
-						  const closeBtn = document.getElementsByClassName('close')[0];
-						  const modalCloseBtn = document.getElementById('modal-close-btn');
-						  
-						  // Log for debugging
-						  console.log("Contact form script initialized at: " + new Date().toLocaleString());
-						  
-						  // Initialize EmailJS
-						  (function() {
+						// Get form elements
+						const contactForm = document.getElementById('contact-form');
+						const submitText = document.getElementById('submit-text');
+						const spinner = document.getElementById('spinner');
+						const modal = document.getElementById('confirmation-modal');
+						const closeBtn = document.getElementsByClassName('close')[0];
+						const modalCloseBtn = document.getElementById('modal-close-btn');
+						
+						// Log for debugging
+						console.log("Contact form script initialized at: " + new Date().toLocaleString());
+						
+						// Initialize EmailJS
+						(function() {
 							try {
-							  emailjs.init("lrsrduZJQAymOwmac");
-							  console.log("EmailJS initialized successfully");
+							emailjs.init("lrsrduZJQAymOwmac");
+							console.log("EmailJS initialized successfully");
 							} catch (error) {
-							  console.error("EmailJS initialization error:", error);
+							console.error("EmailJS initialization error:", error);
 							}
-						  })();
-						  
-						  // Modal close handlers
-						  if (closeBtn) {
+						})();
+						
+						// Modal close handlers
+						if (closeBtn) {
 							closeBtn.onclick = function() {
-							  modal.style.display = "none";
+							modal.style.display = "none";
 							}
-						  }
-						  
-						  if (modalCloseBtn) {
+						}
+						
+						if (modalCloseBtn) {
 							modalCloseBtn.onclick = function() {
-							  modal.style.display = "none";
+							modal.style.display = "none";
 							}
-						  }
-						  
-						  window.onclick = function(event) {
+						}
+						
+						window.onclick = function(event) {
 							if (event.target == modal) {
-							  modal.style.display = "none";
+							modal.style.display = "none";
 							}
-						  }
-						  
-						  // Form submission
-						  if (contactForm) {
+						}
+						
+						// Form submission
+						if (contactForm) {
 							contactForm.addEventListener('submit', function(event) {
-							  event.preventDefault();
-							  
-							  // Form validation
-							  const name = document.getElementById('name').value.trim();
-							  const email = document.getElementById('email').value.trim();
-							  const message = document.getElementById('message').value.trim();
-							  
-							  if (!name || !email || !message) {
+							event.preventDefault();
+							
+							// Form validation
+							const name = document.getElementById('name').value.trim();
+							const email = document.getElementById('email').value.trim();
+							const message = document.getElementById('message').value.trim();
+							
+							if (!name || !email || !message) {
 								alert('Please fill in all fields');
 								return;
-							  }
-							  
-							  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+							}
+							
+							if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
 								alert('Please enter a valid email address');
 								return;
-							  }
-							  
-							  // Show spinner
-							  submitText.style.display = 'none';
-							  spinner.style.display = 'block';
-							  
-							  // Prepare template parameters
-							  const templateParams = {
+							}
+							
+							// Show spinner
+							submitText.style.display = 'none';
+							spinner.style.display = 'block';
+							
+							// Prepare template parameters
+							const templateParams = {
 								from_name: name,
 								from_email: email,
 								message: message,
 								to_name: 'MumbaiSec Admin',
 								reply_to: email,
 								to_email: 'yajwinjain@gmail.com'
-							  };
-							  
-							  // Log for debugging
-							  console.log("Sending email with params:", JSON.stringify(templateParams));
-							  
-							  // Method 1: Direct EmailJS library method
-							  sendEmail(templateParams);
-							  
-							  function sendEmail(params) {
+							};
+							
+							// Log for debugging
+							console.log("Sending email with params:", JSON.stringify(templateParams));
+							
+							// Method 1: Direct EmailJS library method
+							sendEmail(templateParams);
+							
+							function sendEmail(params) {
 								console.log("Attempting to send email with EmailJS...");
 								
 								// Using EmailJS library
 								emailjs.send('service_oyi7x7h', 'template_vvlwt2q', params)
-								  .then(function(response) {
+								.then(function(response) {
 									console.log("EmailJS SUCCESS:", response);
 									handleSuccess();
-								  })
-								  .catch(function(error) {
+								})
+								.catch(function(error) {
 									console.error("EmailJS failed, trying direct API method:", error);
 									sendWithDirectAPI(params);
-								  });
-							  }
-							  
-							  function sendWithDirectAPI(params) {
+								});
+							}
+							
+							function sendWithDirectAPI(params) {
 								console.log("Attempting to send with direct API call...");
 								
 								// Using direct API call as fallback
 								fetch('https://api.emailjs.com/api/v1.0/email/send', {
-								  method: 'POST',
-								  headers: {
+								method: 'POST',
+								headers: {
 									'Content-Type': 'application/json',
-								  },
-								  body: JSON.stringify({
+								},
+								body: JSON.stringify({
 									service_id: 'service_oyi7x7h',
 									template_id: 'template_vvlwt2q',
 									user_id: 'lrsrduZJQAymOwmac',
 									template_params: params
-								  })
+								})
 								})
 								.then(function(response) {
-								  if (response.ok) {
+								if (response.ok) {
 									console.log("Direct API method SUCCESS");
 									handleSuccess();
-								  } else {
+								} else {
 									console.error("Direct API method FAILED:", response.statusText);
 									sendWithXHR(params);
-								  }
+								}
 								})
 								.catch(function(error) {
-								  console.error("Fetch error:", error);
-								  sendWithXHR(params);
+								console.error("Fetch error:", error);
+								sendWithXHR(params);
 								});
-							  }
-							  
-							  function sendWithXHR(params) {
+							}
+							
+							function sendWithXHR(params) {
 								console.log("Attempting final XHR method...");
 								
 								// Last resort: XMLHttpRequest
@@ -1113,114 +1178,115 @@
 								xhr.setRequestHeader('Content-Type', 'application/json');
 								
 								xhr.onload = function() {
-								  if (this.status >= 200 && this.status < 300) {
+								if (this.status >= 200 && this.status < 300) {
 									console.log("XHR method SUCCESS");
 									handleSuccess();
-								  } else {
+								} else {
 									console.error("All email methods failed");
 									handleFailure();
-								  }
+								}
 								};
 								
 								xhr.onerror = function() {
-								  console.error("XHR error");
-								  handleFailure();
+								console.error("XHR error");
+								handleFailure();
 								};
 								
 								xhr.send(JSON.stringify({
-								  service_id: 'service_oyi7x7h',
-								  template_id: 'template_vvlwt2q',
-								  user_id: 'lrsrduZJQAymOwmac',
-								  template_params: params
+								service_id: 'service_oyi7x7h',
+								template_id: 'template_vvlwt2q',
+								user_id: 'lrsrduZJQAymOwmac',
+								template_params: params
 								}));
-							  }
-							  
-							  function handleSuccess() {
+							}
+							
+							function handleSuccess() {
 								submitText.style.display = 'inline';
 								spinner.style.display = 'none';
 								contactForm.reset();
 								modal.style.display = "block";
-							  }
-							  
-							  function handleFailure() {
+							}
+							
+							function handleFailure() {
 								submitText.style.display = 'inline';
 								spinner.style.display = 'none';
 								alert('Unable to send message. Please contact us directly at yajwinjain@gmail.com');
-							  }
+							}
 							});
-						  } else {
+						} else {
 							console.error("Contact form element not found");
-						  }
+						}
 						});
-					  </script>
-					  
-					  <!-- Custom Animation Effects -->
-					  <script type="text/javascript">
+					</script>
+					
+					<!-- Custom Animation Effects -->
+					<script type="text/javascript">
 						document.addEventListener('DOMContentLoaded', function() {
-						  // Function to animate elements when they come into view
-						  function animateOnScroll() {
+						// Function to animate elements when they come into view
+						function animateOnScroll() {
 							var elements = document.querySelectorAll('.feature-box, .skill-box, .activity-box, h2, .button, .calendar-container, .discord-container');
 							
 							elements.forEach(function(element) {
-							  var position = element.getBoundingClientRect();
-							  
-							  // Check if element is in viewport
-							  if(position.top < window.innerHeight && position.bottom >= 0) {
+							var position = element.getBoundingClientRect();
+							
+							// Check if element is in viewport
+							if(position.top < window.innerHeight && position.bottom >= 0) {
 								element.style.animation = "fadeInUp 0.6s ease forwards";
-							  }
+							}
 							});
-						  }
-						  
-						  // Add animation style
-						  var styleSheet = document.createElement("style");
-						  styleSheet.innerHTML = `
+						}
+						
+						// Add animation style
+						var styleSheet = document.createElement("style");
+						styleSheet.innerHTML = `
 							@keyframes fadeInUp {
-							  from {
+							from {
 								opacity: 0;
 								transform: translate3d(0, 30px, 0);
-							  }
-							  to {
+							}
+							to {
 								opacity: 1;
 								transform: translate3d(0, 0, 0);
-							  }
+							}
 							}
 							
 							@keyframes pulse {
-							  0% {
+							0% {
 								box-shadow: 0 0 0 0 rgba(74, 227, 181, 0.4);
-							  }
-							  70% {
+							}
+							70% {
 								box-shadow: 0 0 0 10px rgba(74, 227, 181, 0);
-							  }
-							  100% {
+							}
+							100% {
 								box-shadow: 0 0 0 0 rgba(74, 227, 181, 0);
-							  }
+							}
 							}
 							
 							.pulse {
-							  animation: pulse 2s infinite;
+							animation: pulse 2s infinite;
 							}
-						  `;
-						  document.head.appendChild(styleSheet);
-						  
-						  // Initially hide elements that will be animated
-						  var elementsToAnimate = document.querySelectorAll('.feature-box, .skill-box, .activity-box, h2, .button:not(.scrolly), .calendar-container, .discord-container');
-						  elementsToAnimate.forEach(function(element) {
+						`;
+						document.head.appendChild(styleSheet);
+						
+						// Initially hide elements that will be animated
+						var elementsToAnimate = document.querySelectorAll('.feature-box, .skill-box, .activity-box, h2, .button:not(.scrolly), .calendar-container, .discord-container');
+						elementsToAnimate.forEach(function(element) {
 							element.style.opacity = "0";
-						  });
-						  
-						  // Add pulse effect to important buttons
-						  var importantButtons = document.querySelectorAll('#intro .button, #sponsors .button, .discord-button');
-						  importantButtons.forEach(function(button) {
-							button.classList.add('pulse');
-						  });
-						  
-						  // Run animation on scroll
-						  window.addEventListener('scroll', animateOnScroll);
-						  
-						  // Run initially
-						  animateOnScroll();
 						});
-					  </script>
-					</body>
-				</html>
+						
+						// Add pulse effect to important buttons
+						var importantButtons = document.querySelectorAll('#intro .button, #sponsors .button, .discord-button');
+						importantButtons.forEach(function(button) {
+							button.classList.add('pulse');
+						});
+						
+						// Run animation on scroll
+						window.addEventListener('scroll', animateOnScroll);
+						
+						// Run initially
+						animateOnScroll();
+						});
+					</script>
+				</div>
+			</body>
+		</html>
