@@ -45,79 +45,37 @@
 				z-index: -1;
 			}
 			
-			/* Fixed sidebar with line removed */
-			#sidebar { 
-				background: var(--cyber-medium) !important;
-				border-right: 1px solid var(--cyber-accent) !important;
-				border-left: none !important;
-				border-top: none !important;
-				border-bottom: none !important;
-			}
+			/* Remove the line from the left navigation bar */
+#sidebar { 
+    background: var(--cyber-medium) !important;
+    border-right: 1px solid var(--cyber-accent) !important;
+    border-left: none !important; /* Add this to ensure no left border */
+    border-top: none !important; /* Add this to ensure no top border */
+    border-bottom: none !important; /* Add this to ensure no bottom border */
+}
+
+/* Remove any possible line from sections inside sidebar */
+#sidebar nav ul li {
+    border: none !important;
+}
+
+/* Remove any divider styling that might be causing lines */
+#sidebar nav ul li:after,
+#sidebar .inner:after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Remove possible line from sidebar sections */
+section::after {
+    content: none !important;
+    opacity: 0 !important;
+}
 			
-			/* Remove line from sidebar items */
-			#sidebar nav ul li {
-				border: none !important;
-			}
-			
-			/* Remove any divider styling */
-			#sidebar nav ul li:after,
-			#sidebar .inner:after {
-				display: none !important;
-				content: none !important;
-			}
-			
-			#sidebar nav a {
-				color: var(--cyber-text) !important;
-				transition: color 0.3s, border-left 0.3s !important;
-				border-left: 0px solid var(--cyber-accent) !important;
-				padding-left: 1em !important;
-			}
-			
-			#sidebar nav a:hover { 
-				color: var(--cyber-accent) !important; 
-				border-left: 4px solid var(--cyber-accent) !important;
-			}
-			
-			#sidebar nav a.active { 
-				color: var(--cyber-accent) !important;
-				border-left: 4px solid var(--cyber-accent) !important;
-			}
-			
-			/* Section styling with increased spacing */
 			.wrapper.style1 { background-color: var(--cyber-medium) !important; }
 			.wrapper.style2 { background-color: var(--cyber-dark) !important; }
 			.wrapper.style3 { background-color: var(--cyber-medium) !important; }
 			.wrapper.style1-alt { background-color: var(--cyber-dark) !important; }
-			
-			/* Increased spacing between sections */
-			section.wrapper {
-				padding: 5em 0 !important; /* Increased from 3em to 5em */
-				margin-bottom: 2em !important; /* Added spacing after sections */
-			}
-			
-			/* Special spacing for skills and activities */
-			#two.wrapper {
-				margin-bottom: 3em !important; /* Increased space after skills section */
-			}
-			
-			/* Clearly differentiate meetup section */
-			#meetup.wrapper {
-				margin-top: 3em !important;
-				padding-top: 6em !important;
-				background: linear-gradient(to bottom, var(--cyber-dark), var(--cyber-medium)) !important;
-				position: relative;
-			}
-			
-			#meetup.wrapper::before {
-				content: "";
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 5px;
-				background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2));
-				opacity: 0.7;
-			}
 			
 			h1, h2, h3, h4, h5, h6 {
 				color: var(--cyber-accent) !important;
@@ -369,6 +327,7 @@
 				max-width: 100% !important;
 				overflow: hidden !important;
 				margin: 0 !important;
+				padding: 3em 0 !important;
 				clear: both !important;
 			}
 
@@ -419,11 +378,15 @@
 				overflow: hidden;
 			}
 			
-			/* Remove section bottom borders */
 			section::after {
-				content: none !important;
-				opacity: 0 !important;
-				display: none !important;
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 3px;
+				background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2));
+				opacity: 0.5;
 			}
 			
 			/* Cyber glitch animation for heading */
@@ -477,7 +440,7 @@
 				box-shadow: 0 0 15px rgba(74, 227, 181, 0.7) !important;
 			}
 
-			/* Added styles for Discord and Meetup banners */
+			/* Added styles for Discord banner */
 			.discord-container, .meetup-container {
 				background-color: rgba(26, 35, 51, 0.7);
 				border: 1px solid var(--cyber-accent);
@@ -827,7 +790,8 @@
 	</head>
 	<body class="is-preload">
 
-		<!-- Sidebar<section id="sidebar">
+		<!-- Sidebar -->
+			<section id="sidebar">
 				<div class="inner">
 					<div class="logo-container">
 						<img src="images/mumbaisec-logo.png" alt="MumbaiSec Logo" class="logo-image" />
@@ -856,7 +820,7 @@
 						<div class="inner">
 							<h1 class="glitch-text">Welcome to MumbaiSec</h1>
 							<p class="major">Mumbai's Premier Cybersecurity Community</p>
-							<p>Are you passionate about cybersecurity? Looking to enhance your skills, network with like-minded individuals, or just starting your journey in the world of information security?</p>
+							<p>Are you passionate about cybers<p>Are you passionate about cybersecurity? Looking to enhance your skills, network with like-minded individuals, or just starting your journey in the world of information security?</p>
 							<p>We are a dynamic community of cybersecurity enthusiasts, professionals, and learners who come together to:</p>
 							<ul style="margin-bottom: 1.5em;">
 								<li><i class="fas fa-shield-alt" style="color: var(--cyber-accent); margin-right: 0.5em;"></i> Master practical security skills through hands-on workshops</li>
