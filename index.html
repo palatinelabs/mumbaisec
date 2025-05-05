@@ -544,30 +544,36 @@
 				}
 			}
 			
-			/* Logo Styling - UPDATED FOR TRANSPARENCY */
+			/* Logo Styling - UPDATED FOR LARGER SIZE */
 			.logo-container {
 				text-align: center;
 				margin-bottom: 2em;
 				background: transparent !important;
 				position: relative;
 				z-index: 2;
+				padding: 20px 0; /* Add padding for more space */
 			}
 			
 			.logo-image {
-				max-width: 200px;
+				max-width: 300px; /* Increased from 200px to 300px */
 				height: auto;
 				margin: 0 auto;
 				display: block;
 				background: transparent !important;
 				mix-blend-mode: normal; /* Helps with transparency */
-				-webkit-filter: drop-shadow(0 0 0 transparent);
-				filter: drop-shadow(0 0 0 transparent);
+				-webkit-filter: drop-shadow(0 0 10px rgba(74, 227, 181, 0.5)); /* Added glow effect */
+				filter: drop-shadow(0 0 10px rgba(74, 227, 181, 0.5)); /* Added glow effect */
 				position: relative;
 				z-index: 3;
+				transition: transform 0.3s ease; /* Smooth transition for hover effect */
+			}
+			
+			.logo-image:hover {
+				transform: scale(1.05); /* Slight grow effect on hover */
 			}
 			
 			#sidebar .logo-container {
-				padding: 1.5em 0;
+				padding: 2em 0; /* Increased padding in sidebar */
 				position: relative;
 				z-index: 2;
 				background: transparent !important;
@@ -585,10 +591,12 @@
 			}
 			
 			#sidebar .logo-image {
-				max-width: 80%;
+				max-width: 90%; /* Increased from 80% to 90% */
 				background: transparent !important;
 				position: relative;
 				z-index: 3;
+				-webkit-filter: drop-shadow(0 0 10px rgba(74, 227, 181, 0.5)); /* Added glow effect */
+				filter: drop-shadow(0 0 10px rgba(74, 227, 181, 0.5)); /* Added glow effect */
 			}
 			
 			/* Skills & Training Section with Fixed Icons */
@@ -783,8 +791,7 @@
 								<li><i class="fas fa-flag" style="color: var(--cyber-accent); margin-right: 0.5em;"></i> Participate in exciting CTF competitions and security challenges</li>
 								<li><i class="fas fa-chalkboard-teacher" style="color: var(--cyber-accent); margin-right: 0.5em;"></i> Learn from industry experts and guest speakers</li>
 								<li><i class="fas fa-users" style="color: var(--cyber-accent); margin-right: 0.5em;"></i> Network with fellow security enthusiasts</li>
-							</ul>
-							<ul class="actions">
+							</ul<ul class="actions">
 								<li><a href="#one" class="button scrolly">Discover More</a></li>
 								<li><a href="#three" class="button scrolly">Join Us</a></li>
 							</ul>
