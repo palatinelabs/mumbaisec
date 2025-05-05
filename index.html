@@ -436,7 +436,7 @@
 			}
 
 			/* Added styles for Discord banner */
-			.discord-container {
+			.discord-container, .meetup-container {
 				background-color: rgba(26, 35, 51, 0.7);
 				border: 1px solid var(--cyber-accent);
 				padding: 2.5em;
@@ -450,7 +450,7 @@
 				margin: 3em 0;
 			}
 			
-			.discord-container::before {
+			.discord-container::before, .meetup-container::before {
 				content: "";
 				position: absolute;
 				top: 0;
@@ -460,19 +460,28 @@
 				background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2));
 			}
 			
-			.discord-icon-container {
+			.discord-icon-container, .meetup-icon-container {
 				min-width: 120px;
 				height: 120px;
 				border-radius: 50%;
-				background-color: rgba(114, 137, 218, 0.2);
-				border: 2px solid #7289DA;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				margin-right: 1em;
 				position: relative;
 				overflow: hidden;
+			}
+			
+			.discord-icon-container {
+				background-color: rgba(114, 137, 218, 0.2);
+				border: 2px solid #7289DA;
 				animation: pulse-discord 2s infinite;
+			}
+			
+			.meetup-icon-container {
+				background-color: rgba(237, 28, 64, 0.2);
+				border: 2px solid #ED1C40;
+				animation: pulse-meetup 2s infinite;
 			}
 			
 			.discord-icon-container i {
@@ -481,17 +490,23 @@
 				text-shadow: 0 0 10px rgba(114, 137, 218, 0.7);
 			}
 			
-			.discord-content {
+			.meetup-icon-container i {
+				font-size: 4em;
+				color: #ED1C40;
+				text-shadow: 0 0 10px rgba(237, 28, 64, 0.7);
+			}
+			
+			.discord-content, .meetup-content {
 				flex: 1;
 			}
 			
-			.discord-content h2 {
+			.discord-content h2, .meetup-content h2 {
 				color: var(--cyber-accent) !important;
 				margin-bottom: 0.5em !important;
 				font-size: 2em !important;
 			}
 			
-			.discord-content p {
+			.discord-content p, .meetup-content p {
 				color: var(--cyber-text) !important;
 				margin-bottom: 1.5em !important;
 				font-size: 1.1em !important;
@@ -508,13 +523,29 @@
 				transition: all 0.3s ease !important;
 			}
 			
+			.meetup-button {
+				background-color: #ED1C40 !important;
+				border-color: #ED1C40 !important;
+				color: white !important;
+				display: inline-flex !important;
+				align-items: center !important;
+				gap: 0.5em !important;
+				transition: all 0.3s ease !important;
+			}
+			
 			.discord-button:hover {
 				background-color: #5e77d4 !important;
 				box-shadow: 0 0 15px rgba(114, 137, 218, 0.7) !important;
 				transform: translateY(-2px) !important;
 			}
 			
-			.discord-button i {
+			.meetup-button:hover {
+				background-color: #d91838 !important;
+				box-shadow: 0 0 15px rgba(237, 28, 64, 0.7) !important;
+				transform: translateY(-2px) !important;
+			}
+			
+			.discord-button i, .meetup-button i {
 				font-size: 1.2em !important;
 			}
 			
@@ -531,15 +562,28 @@
 				}
 			}
 			
-			/* Mobile responsiveness for Discord banner */
+			/* Animation for the Meetup icon */
+			@keyframes pulse-meetup {
+				0% {
+					box-shadow: 0 0 0 0 rgba(237, 28, 64, 0.4);
+				}
+				70% {
+					box-shadow: 0 0 0 15px rgba(237, 28, 64, 0);
+				}
+				100% {
+					box-shadow: 0 0 0 0 rgba(237, 28, 64, 0);
+				}
+			}
+			
+			/* Mobile responsiveness for Discord/Meetup banner */
 			@media screen and (max-width: 768px) {
-				.discord-container {
+				.discord-container, .meetup-container {
 					flex-direction: column;
 					text-align: center;
 					padding: 2em 1.5em;
 				}
 				
-				.discord-icon-container {
+				.discord-icon-container, .meetup-icon-container {
 					margin: 0 auto 1.5em auto;
 				}
 			}
@@ -765,10 +809,11 @@
 						<ul>
 							<li><a href="#intro">Welcome</a></li>
 							<li><a href="#one">What We're About</a></li>
-							<li><a href="#two">Skills & Training</a></li>
+							<li><a href="#two">Skills<li><a href="#two">Skills & Training</a></li>
 							<li><a href="#activities">Our Activities</a></li>
 							<li><a href="#calendar">Calendar</a></li>
 							<li><a href="#sponsors">Sponsors</a></li>
+							<li><a href="#meetup">Join Meetup</a></li>
 							<li><a href="#discord">Join Discord</a></li>
 							<li><a href="#three">Get in Touch</a></li>
 						</ul>
@@ -791,7 +836,8 @@
 								<li><i class="fas fa-flag" style="color: var(--cyber-accent); margin-right: 0.5em;"></i> Participate in exciting CTF competitions and security challenges</li>
 								<li><i class="fas fa-chalkboard-teacher" style="color: var(--cyber-accent); margin-right: 0.5em;"></i> Learn from industry experts and guest speakers</li>
 								<li><i class="fas fa-users" style="color: var(--cyber-accent); margin-right: 0.5em;"></i> Network with fellow security enthusiasts</li>
-							</ul<ul class="actions">
+							</ul>
+							<ul class="actions">
 								<li><a href="#one" class="button scrolly">Discover More</a></li>
 								<li><a href="#three" class="button scrolly">Join Us</a></li>
 							</ul>
@@ -990,6 +1036,24 @@
 						</div>
 					</section>
 
+					<!-- Meetup Banner Section -->
+					<section id="meetup" class="wrapper style2 fade-up">
+						<div class="inner">
+						<div class="meetup-container">
+							<div class="meetup-icon-container">
+							<i class="fab fa-meetup"></i>
+							</div>
+							<div class="meetup-content">
+							<h2>Join Our Meetup Group</h2>
+							<p>Connect with us on Meetup to stay updated about our in-person events, workshops, and gatherings. It's the best way to engage with our community and participate in our upcoming cybersecurity activities!</p>
+							<a href="https://www.meetup.com/mumbaisec/" class="button meetup-button" target="_blank">
+								<i class="fab fa-meetup"></i> Join MumbaiSec Meetup
+							</a>
+							</div>
+						</div>
+						</div>
+					</section>
+
 					<!-- Discord Banner Section -->
 					<section id="discord" class="wrapper style3 fade-up">
 						<div class="inner">
@@ -1043,6 +1107,7 @@
 								<h3>Social</h3>
 								<ul class="icons">
 									<li><a href="https://discord.gg/3gAw8SNY" class="icon brands fab fa-discord"><span class="label">Discord</span></a></li>
+									<li><a href="https://www.meetup.com/mumbaisec/" class="icon brands fab fa-meetup"><span class="label">Meetup</span></a></li>
 									<li><a href="#" class="icon brands fab fa-twitter"><span class="label">Twitter</span></a></li>
 									<li><a href="#" class="icon brands fab fa-github"><span class="label">GitHub</span></a></li>
 								</ul>
@@ -1258,7 +1323,7 @@
 						document.addEventListener('DOMContentLoaded', function() {
 						// Function to animate elements when they come into view
 						function animateOnScroll() {
-							var elements = document.querySelectorAll('.feature-box, .skill-box, .activity-box, h2, .button, .calendar-container, .discord-container');
+							var elements = document.querySelectorAll('.feature-box, .skill-box, .activity-box, h2, .button, .calendar-container, .discord-container, .meetup-container');
 							
 							elements.forEach(function(element) {
 							var position = element.getBoundingClientRect();
@@ -1303,13 +1368,13 @@
 						document.head.appendChild(styleSheet);
 						
 						// Initially hide elements that will be animated
-						var elementsToAnimate = document.querySelectorAll('.feature-box, .skill-box, .activity-box, h2, .button:not(.scrolly), .calendar-container, .discord-container');
+						var elementsToAnimate = document.querySelectorAll('.feature-box, .skill-box, .activity-box, h2, .button:not(.scrolly), .calendar-container, .discord-container, .meetup-container');
 						elementsToAnimate.forEach(function(element) {
 							element.style.opacity = "0";
 						});
 						
 						// Add pulse effect to important buttons
-						var importantButtons = document.querySelectorAll('#intro .button, #sponsors .button, .discord-button');
+						var importantButtons = document.querySelectorAll('#intro .button, #sponsors .button, .discord-button, .meetup-button');
 						importantButtons.forEach(function(button) {
 							button.classList.add('pulse');
 						});
