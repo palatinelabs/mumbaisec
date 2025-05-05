@@ -45,27 +45,32 @@
 				z-index: -1;
 			}
 			
-			#sidebar { 
-				background: var(--cyber-medium) !important;
-				border-right: 1px solid var(--cyber-accent) !important;
-			}
-			
-			#sidebar nav a {
-				color: var(--cyber-text) !important;
-				transition: color 0.3s, border-left 0.3s !important;
-				border-left: 0px solid var(--cyber-accent) !important;
-				padding-left: 1em !important;
-			}
-			
-			#sidebar nav a:hover { 
-				color: var(--cyber-accent) !important; 
-				border-left: 4px solid var(--cyber-accent) !important;
-			}
-			
-			#sidebar nav a.active { 
-				color: var(--cyber-accent) !important;
-				border-left: 4px solid var(--cyber-accent) !important;
-			}
+			/* Remove the line from the left navigation bar */
+#sidebar { 
+    background: var(--cyber-medium) !important;
+    border-right: 1px solid var(--cyber-accent) !important;
+    border-left: none !important; /* Add this to ensure no left border */
+    border-top: none !important; /* Add this to ensure no top border */
+    border-bottom: none !important; /* Add this to ensure no bottom border */
+}
+
+/* Remove any possible line from sections inside sidebar */
+#sidebar nav ul li {
+    border: none !important;
+}
+
+/* Remove any divider styling that might be causing lines */
+#sidebar nav ul li:after,
+#sidebar .inner:after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Remove possible line from sidebar sections */
+section::after {
+    content: none !important;
+    opacity: 0 !important;
+}
 			
 			.wrapper.style1 { background-color: var(--cyber-medium) !important; }
 			.wrapper.style2 { background-color: var(--cyber-dark) !important; }
